@@ -2,7 +2,7 @@
 
 A neonatal jaundice severity classifier based on the Kramer dermal staging system.
 
-**Status:** Not started. Planned for Weeks 6–7.
+**Status:** Not started. Planned for Week 2.
 
 ---
 

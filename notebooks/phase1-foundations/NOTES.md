@@ -1,6 +1,6 @@
 # Phase 1 — Foundations
 
-**Weeks 1–3** — Python, NumPy, pandas, time-series indexing.
+**Week 1** — Python, NumPy, pandas, time-series indexing.
 
 ## Goal
 
@@ -12,9 +12,9 @@ Comfortable enough with the data stack to do real work in Phases 2+. Specificall
 
 ## Planned notebooks
 - `week01-numpy-basics.ipynb` — NumPy operations on simulated vital signs
-- `week02-pandas-fundamentals.ipynb` — DataFrames, groupby, joins on a public dataset
-- `week03-time-series-indexing.ipynb` — Resampling, rolling windows, lag features
-- `week03-hrv-from-rr-intervals.ipynb` — Compute SDNN, RMSSD, pNN50 from R-R intervals
+- `week01-pandas-fundamentals.ipynb` — DataFrames, groupby, joins on a public dataset
+- `week01-time-series-indexing.ipynb` — Resampling, rolling windows, lag features
+- `week01-hrv-from-rr-intervals.ipynb` — Compute SDNN, RMSSD, pNN50 from R-R intervals
 
 ## Running notes
 *(populate as the phase progresses — questions, gotchas, things that clicked)*

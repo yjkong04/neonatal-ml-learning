@@ -4,7 +4,7 @@ Curated papers and references that anchor each phase. Read alongside the coding 
 
 ---
 
-## Foundational (Weeks 1–4)
+## Foundational (Weeks 1–2)
 
 - **Reyna et al. 2020** — "Early Prediction of Sepsis from Clinical Data: The PhysioNet/Computing in Cardiology Challenge 2019." *Critical Care Medicine.* Open access. The benchmark for the anchor project.
 - **Moorman et al. 2011** — "Mortality reduction by heart rate characteristic monitoring in very low birth weight neonates: A randomized trial." *The Journal of Pediatrics.* The original HeRO score paper.
