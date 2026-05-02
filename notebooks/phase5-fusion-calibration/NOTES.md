@@ -1,6 +1,6 @@
 # Phase 5 — Fusion & Calibration
 
-**Weeks 14–16** — Multi-modal fusion, probability calibration, fairness, explainability.
+**Week 5** — Multi-modal fusion, probability calibration, fairness, explainability.
 
 ## Goal
 
@@ -21,9 +21,9 @@ This is the underrated phase. Most online courses skip it entirely. This is wher
 - Pranav Rajpurkar's *AI for Medical Diagnosis* on Coursera (companion course)
 
 ## Planned notebooks
-- `week14-probability-calibration.ipynb` — Calibration walkthrough on imbalanced data
-- `week15-shap-explanations.ipynb` — SHAP-based explanations for a clinical model
-- `week16-fairness-analysis.ipynb` — Disaggregated metrics across demographic subgroups
+- `week05-probability-calibration.ipynb` — Calibration walkthrough on imbalanced data
+- `week05-shap-explanations.ipynb` — SHAP-based explanations for a clinical model
+- `week05-fairness-analysis.ipynb` — Disaggregated metrics across demographic subgroups
 
 ## Running notes
 *(populate as the phase progresses)*

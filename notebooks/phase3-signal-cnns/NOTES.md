@@ -1,6 +1,6 @@
 # Phase 3 — Signal CNNs
 
-**Weeks 8–11** — 1D CNNs on biomedical time-series.
+**Week 3** — 1D CNNs on biomedical time-series.
 
 ## Goal
 
@@ -12,10 +12,10 @@ Train models on raw ECG/EEG/respiratory waveforms. Understand both the pure 1D C
 - PhysioNet `wfdb` library documentation
 
 ## Planned notebooks
-- `week08-signal-processing-fundamentals.ipynb` — FFT, STFT, mel-spectrograms, R-peak detection
-- `week09-1d-cnn-ecg.ipynb` — Simple 1D CNN on PhysioNet 2017 AF data
-- `week10-spectrogram-2d-cnn.ipynb` — Same task via spectrograms, comparison
-- `week11-hrv-features-and-fusion.ipynb` — Classical HRV features alongside deep features
+- `week03-signal-processing-fundamentals.ipynb` — FFT, STFT, mel-spectrograms, R-peak detection
+- `week03-1d-cnn-ecg.ipynb` — Simple 1D CNN on PhysioNet 2017 AF data
+- `week03-spectrogram-2d-cnn.ipynb` — Same task via spectrograms, comparison
+- `week03-hrv-features-and-fusion.ipynb` — Classical HRV features alongside deep features
 
 ## Running notes
 *(populate as the phase progresses)*

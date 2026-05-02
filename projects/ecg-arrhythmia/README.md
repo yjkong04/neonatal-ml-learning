@@ -2,7 +2,7 @@
 
 A 1D CNN for atrial fibrillation detection from short single-lead ECG segments.
 
-**Status:** Not started. Planned for Weeks 10–11.
+**Status:** Not started. Planned for Week 3.
 
 ---
 

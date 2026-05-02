@@ -1,0 +1,53 @@
+# Textbooks (copyrighted PDFs etc. — never push)
+textbooks/
+
+# Personal context for Claude (contains internal Corvita references — never push)
+prevtexts.md
+
+# Data files (public datasets are downloaded fresh, not committed)
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.pt
+*.pth
+*.onnx
+*.zip
+*.tar
+*.tar.gz
+data/
+datasets/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Experiment tracking
+wandb/
+mlruns/
+
+# Secrets
+.env
+.env.local

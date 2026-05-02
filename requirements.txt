@@ -1,0 +1,44 @@
+# Core stack — install everything with: pip3 install -r requirements.txt
+# Phase 1 only needs numpy / pandas / matplotlib / jupyterlab; the rest
+# can be installed lazily as later phases begin.
+
+# --- Numerical (Phase 1+) ---
+numpy
+scipy
+pandas
+
+# --- Visualization (Phase 1+) ---
+matplotlib
+seaborn
+plotly
+
+# --- Notebook (Phase 1+) ---
+jupyterlab
+ipywidgets
+
+# --- Classical ML (Phase 2+) ---
+scikit-learn
+xgboost
+
+# --- Deep learning (Phase 2+) ---
+torch
+torchvision
+torchaudio
+fastai
+
+# --- Signals (Phase 3+) ---
+wfdb
+librosa
+pyhrv
+
+# --- Audio (Phase 4+) ---
+# librosa already covers most needs; add soundfile if needed
+soundfile
+
+# --- Explainability + fairness (Phase 5) ---
+shap
+captum
+fairlearn
+
+# --- Experiment tracking (Phase 3+) ---
+wandb

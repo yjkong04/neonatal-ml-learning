@@ -2,7 +2,7 @@
 
 The capstone project for this entire learning plan. A multi-modal early-warning system that fuses physiological time-series with computer vision to predict sepsis onset, with calibrated probability outputs and demographic subgroup fairness analysis.
 
-**Status:** Not started. Planned for Weeks 14–16, building on components from earlier phases.
+**Status:** Not started. Planned for Week 5, building on components from earlier phases.
 
 ---
 
