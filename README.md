@@ -18,7 +18,7 @@ Full breakdown in [STUDY_PLAN.md](STUDY_PLAN.md).
 
 ## Repo layout
 
-```
+``` MarkDown
 .
 ├── notebooks/         Per-phase notebooks (one per checkpoint)
 │   ├── phase1-foundations/
