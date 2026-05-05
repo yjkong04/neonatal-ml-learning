@@ -20,11 +20,21 @@ A compressed, intensive curriculum to build the data science and ML skills neede
 
 Comfortable enough with the data stack to do real work in Phases 2+. The non-negotiable skill is **time-series indexing** — every modality downstream is timestamped.
 
-**Resource:** McKinney, *Python for Data Analysis* (3rd ed.). Chapters 1–11. Chapter 11 (time series) is the highest-value chapter.
+**Resource:** McKinney, *Python for Data Analysis* (3rd ed.). Reading order: **Ch 4 → 5 → 6 → 7 → 8 → 11**. Chapter 11 (time series) is the highest-value chapter. Ch 10 (groupby) is deferred to Phase 5 — not blocking until then.
+
+**Why this order, not 1–11:**
+- Ch 4 (NumPy) — done. Foundation for everything.
+- Ch 5 (pandas basics) — required before Ch 7. Covers Series, DataFrame, `.loc`/`.iloc`. Cannot skip.
+- Ch 6 (data loading) — skim only (~20 min). You need `pd.read_csv` and a few options to load any real dataset.
+- Ch 7 (data cleaning) — missing data, outliers, binning. Directly used in every downstream phase.
+- Ch 8 (wrangling) — merge/join for fusing vitals tables and multi-modal data.
+- Ch 11 (time series) — `DatetimeIndex`, resampling, rolling windows. Most critical for ECG and HRV work.
+- Ch 10 (groupby) — defer. Useful for per-cohort aggregations in Phase 5, not blocking before then.
+- Chs 1–3, 9 — skip. Intro material and plotting; matplotlib can be learned as needed.
 
 **Topics this week:**
 - NumPy: arrays, broadcasting, vectorized ops, random number generation
-- pandas: DataFrames, indexing, groupby, joins, missing data
+- pandas: DataFrames, indexing, joins, missing data, cleaning
 - Time-series indexing: `DatetimeIndex`, resampling, rolling windows, lag features
 - Apply: compute basic HRV metrics (SDNN, RMSSD, pNN50) from R-R intervals
 
