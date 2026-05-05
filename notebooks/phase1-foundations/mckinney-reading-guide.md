@@ -1,6 +1,6 @@
 # McKinney Reading Guide — Tiered Priorities & Exercises
 
-Reference while reading *Python for Data Analysis* (3rd ed.). Reading order: **Ch 4 → 7 → 8 → 10 → 11.**
+Reference while reading *Python for Data Analysis* (3rd ed.). Reading order: **Ch 4 → 5 → 6 → 7 → 8 → 11.** Ch 10 (groupby) deferred to Phase 5.
 
 ## Speed rules
 
@@ -89,9 +89,118 @@ Re-run with the same seed — confirm it's identical.
 
 ---
 
+## Chapter 5 — pandas Basics
+
+### Tier 1 — must do (required before Ch 7)
+
+| # | Concept | Why it matters for NOA-AI work |
+|---|---------|-------------------------------|
+| 1 | Series and DataFrame construction | Mental model for every pandas operation downstream |
+| 2 | `.loc` (label-based) vs `.iloc` (position-based) indexing | Getting rows/columns wrong silently is a common bug — know the difference cold |
+| 3 | Selecting columns, filtering rows | The daily bread of data work |
+| 4 | Handling missing data basics (`NaN`, `None`) | Almost all real patient data has gaps |
+| 5 | Index alignment in arithmetic | When you add two Series, pandas aligns on index — surprising if you don't know it |
+
+### Tier 2 — skim (know it exists)
+
+- `pd.Series` from dict — useful for building lookup tables
+- `drop`, `rename`, `reset_index` — housekeeping you'll need occasionally
+- `value_counts` — quick sanity check on categorical columns
+
+### Tier 3 — skip on first pass
+
+- `MultiIndex` (hierarchical indexing) — complex; not needed until Ch 8+
+- `stack` / `unstack` — come back when you actually need it
+
+### Exercises (~15–20 min total)
+
+Do these in a new `week01-pandas-fundamentals.ipynb`.
+
+**1. Build and index a vitals DataFrame**
+```
+Construct a DataFrame with columns ['patient_id', 'hr', 'spo2', 'temp'] and 10 rows of made-up values.
+Use .loc to select rows where hr > 100. Use .iloc to select the first 3 rows and first 2 columns.
+Confirm the results are what you expected.
+```
+
+**2. Index alignment**
+```
+Make two Series: a = pd.Series([1, 2, 3], index=['a','b','c']) and b = pd.Series([10, 20], index=['b','c']).
+Add them. Predict what happens to index 'a' before running.
+```
+
+---
+
+## Chapter 6 — Data Loading *(skim — ~20 min)*
+
+No tiered breakdown — just know these exist:
+
+- `pd.read_csv` and its most common options: `index_col`, `parse_dates`, `na_values`, `dtype`
+- `df.to_csv` for saving processed data
+- `pd.read_parquet` — faster than CSV for large datasets; you'll use this in Phase 3+
+
+Skip everything on Excel, HDF5, JSON, and web scraping — not relevant to the plan.
+
+**No exercises for Ch 6** — you'll get the practice organically the first time you load a real dataset.
+
+---
+
 ## Chapter 7 — Data Cleaning and Preparation
 
-*(populate when you start Ch 7)*
+### Tier 1 — must do (used daily downstream)
+
+| # | Concept | Why it matters for NOA-AI work |
+|---|---------|-------------------------------|
+| 1 | `dropna` / `isnull` / `notnull` | Real vitals tables have gaps — you need to find and decide what to do with them |
+| 2 | `fillna` (forward-fill, backfill, constant) | ECG/SpO2 dropout: filling with last known value vs. interpolation is a clinical decision |
+| 3 | Detecting and filtering outliers (boolean mask + `clip`) | Artifact rejection — same pattern as Ch 4 boolean indexing, now on DataFrames |
+| 4 | `pd.cut` / `pd.qcut` — discretization and binning | Turning continuous HR/SpO2 into clinical categories (brady, normal, tachy) |
+| 5 | `apply` / `map` on Series and DataFrames | Per-column transformations without loops — normalizing, converting units |
+| 6 | Computing indicator/dummy variables (`pd.get_dummies`) | Encoding categorical columns (sex, GA group) before feeding to a model |
+
+### Tier 2 — skim (know it exists)
+
+- `drop_duplicates` — patient records often have repeated rows
+- `replace` — recoding values (e.g. mapping `'M'/'F'` → `0/1`)
+- `rename` — cleaning up column names from raw exports
+- `np.random.permutation` for row shuffling (you'll use this in train/val splits)
+
+### Tier 3 — skip on first pass
+
+- Regular expressions / `re` module (come back when you need complex string parsing)
+- Vectorized string methods (`str.contains`, `str.extract`) — not needed until you're parsing free-text fields
+- `pd.factorize` (overlap with `get_dummies` — not worth two passes)
+
+### Exercises (~15–20 min total)
+
+Do these in `week01-pandas-fundamentals.ipynb` alongside the Ch 5 exercises.
+
+**1. Missing vitals**
+```
+Build a DataFrame with columns ['hr', 'spo2', 'temp'] and 20 rows.
+Randomly set ~15% of values to NaN using rng.choice.
+Count missing values per column. Then fill hr/spo2 with forward-fill and temp with the column mean.
+Verify no NaNs remain.
+```
+
+**2. Outlier clip**
+```
+Given spo2 = pd.Series([98, 102, 75, 99, -3, 95, 101, 88]),
+identify values outside physiologic range (70–100) using a boolean mask.
+Replace them with NaN, then forward-fill.
+```
+
+**3. Binning HR into clinical labels**
+```
+Given hr = pd.Series([55, 78, 105, 160, 190, 95, 130]),
+use pd.cut with bins [0, 60, 100, 160, 300] and labels ['brady','low-normal','normal','tachy'].
+```
+
+**4. Dummy variables**
+```
+Given a DataFrame with a 'sex' column containing 'M'/'F' and a 'ga_group' column with 'preterm'/'term',
+use pd.get_dummies with drop_first=True and confirm the output shape.
+```
 
 ## Chapter 8 — Data Wrangling: Join, Combine, Reshape
 
@@ -99,7 +208,7 @@ Re-run with the same seed — confirm it's identical.
 
 ## Chapter 10 — Data Aggregation and Group Operations
 
-*(populate when you start Ch 10)*
+*(Deferred to Phase 5. Not blocking for Phases 2–4. Come back when you need per-cohort aggregations for the fairness analysis.)*
 
 ## Chapter 11 — Time Series
 
