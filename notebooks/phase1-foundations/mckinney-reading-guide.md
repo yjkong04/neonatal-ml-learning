@@ -1,6 +1,6 @@
 # McKinney Reading Guide — Tiered Priorities & Exercises
 
-Reference while reading *Python for Data Analysis* (3rd ed.). Reading order: **Ch 4 → 5 → 6 → 7 → 8 → 11.** Ch 10 (groupby) deferred to Phase 5.
+Reference while reading *Python for Data Analysis* (3rd ed.). Reading order: **Ch 4 → 5 → 6 → 7 → 8 → 10 → 11.** Ch 4–5 done; Ch 6–7 are fast-skims during the Kramer sprint (days 1–2); Ch 8 / 10 / 11 resume after the demo lands.
 
 ## Speed rules
 
@@ -141,7 +141,7 @@ No tiered breakdown — just know these exist:
 
 Skip everything on Excel, HDF5, JSON, and web scraping — not relevant to the plan.
 
-**No exercises for Ch 6** — you'll get the practice organically the first time you load a real dataset.
+**Scaffold lives in `week01-pandas-fundamentals.ipynb`** (between the Ch 5 and Ch 7 sections) — three short cells: one `pd.read_csv` with kwargs, one `df.to_csv`, one note on `pd.read_parquet`. No formal exercises; type one example per cell as you read.
 
 ---
 
