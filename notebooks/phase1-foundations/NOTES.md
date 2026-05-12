@@ -7,14 +7,18 @@
 Comfortable enough with the data stack to do real work in Phases 2+. Specifically: time-series indexing, because every modality I'll work with downstream is timestamped.
 
 ## Key references
-- McKinney, *Python for Data Analysis* (3rd ed.), Chapters 1–11
+- McKinney, *Python for Data Analysis* (3rd ed.), Chapters 4–8, 10, 11
 - Chapter 11 (time-series) is the most important chapter for what comes later
 
-## Planned notebooks
-- `week01-numpy-basics.ipynb` — NumPy operations on simulated vital signs
-- `week01-pandas-fundamentals.ipynb` — DataFrames, groupby, joins on a public dataset
-- `week01-time-series-indexing.ipynb` — Resampling, rolling windows, lag features
-- `week01-hrv-from-rr-intervals.ipynb` — Compute SDNN, RMSSD, pNN50 from R-R intervals
+## Notebooks
+- `week01-numpy-basics.ipynb` — Ch 4 NumPy ✅ done
+- `week01-pandas-fundamentals.ipynb` — Ch 5 ✅ done; Ch 6 + Ch 7 fast-skim added during compressed sprint
+- `week01-time-series-indexing.ipynb` — Ch 11 resampling, rolling windows, lag features — **deferred to post-Kramer-sprint**
+- `week01-hrv-from-rr-intervals.ipynb` — SDNN, RMSSD, pNN50 from R-R intervals — **deferred to post-Kramer-sprint**
+
+## Sprint pivot (2026-05-12)
+
+The Kramer classifier compressed sprint (see [STUDY_PLAN.md](../../STUDY_PLAN.md)) front-loads Ch 6 + Ch 7 fast-skims into days 1–2, then suspends Phase 1 until after the demo. Ch 8 (wrangling), Ch 10 (groupby), Ch 11 (time series) resume after the demo lands.
 
 ## Running notes
 *(populate as the phase progresses — questions, gotchas, things that clicked)*
