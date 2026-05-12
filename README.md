@@ -1,44 +1,127 @@
-# neonatal-ml-learning
+# Neonatal ML Learning
 
-A compressed 5-week curriculum for learning data science and machine learning, anchored on multi-modal neonatal monitoring problems. Public datasets only.
+A public learning log as I build production-relevant data science skills, anchored on real biomedical ML problems: image classification, biomedical time-series, audio, and multi-modal sensor fusion.
 
-## Plan
+This repo exists for two reasons:
 
-Five phases, one week each:
+1. **To track and prove progress.** Every commit is a checkpoint. The graph is the record.
+2. **To build a portfolio.** By the end, three substantial projects (Kramer jaundice classifier, ECG arrhythmia detection, multi-modal sepsis early-warning) sit alongside the weekly notebooks.
 
-1. **Foundations** (week 1) — Python, NumPy, pandas, time-series indexing
-2. **Image CNNs** (week 2) — Transfer learning → neonatal jaundice classifier
-3. **Signal CNNs** (week 3) — 1D CNNs on biomedical waveforms → ECG arrhythmia classifier
-4. **Audio ML** (week 4) — Mel-spectrograms + CNN → infant cry classification
-5. **Fusion & Calibration** (week 5) — Multi-modal fusion, probability calibration, SHAP, fairness analysis
+All work is on public datasets (PhysioNet, ISIC, Donate-a-Cry, ESC-50, etc.) or self-generated synthetic data. No proprietary information is committed to this repository.
 
-**Anchor project:** Multi-modal neonatal sepsis early-warning system fusing HRV, temperature variance, and movement quality. Validated against PhysioNet 2019 Sepsis Challenge data.
+---
 
-Full breakdown in [STUDY_PLAN.md](STUDY_PLAN.md).
+## Current focus — Kramer classifier sprint
 
-## Repo layout
+The active work is an 8-day compressed sprint to ship a working transfer-learning prototype for neonatal jaundice severity (Kramer zone) classification. This is the production analog of `CNN-Kramer`, one of the specialist models in a multi-modal hierarchical clinical inference network I work on professionally.
 
-``` MarkDown
+**Honest scope:** prototype of the technique, not a deployable model. Trained on public skin imagery as a stand-in for real neonatal jaundice data. The architecture and training pipeline mirror what the production version will use (PyTorch training, exportable to ONNX for TensorRT compilation on edge AI hardware). Clinical safety classification of the production analog is IEC 62304 Class B.
+
+Status and code: [`projects/kramer-classifier/`](projects/kramer-classifier/).
+
+---
+
+## Repo structure
+
+```
 .
-├── notebooks/         Per-phase notebooks (one per checkpoint)
-│   ├── phase1-foundations/
-│   ├── phase2-image-cnns/
-│   ├── phase3-signal-cnns/
-│   ├── phase4-audio-ml/
-│   └── phase5-fusion-calibration/
-├── projects/          Capstone projects with their own READMEs
-│   ├── kramer-classifier/
-│   ├── ecg-arrhythmia/
-│   └── sepsis-early-warning/
-└── resources/         Reading list, datasets, tooling notes
+├── README.md                    This file
+├── STUDY_PLAN.md                Full 16-week plan with compressed sprint
+├── SETUP.md                     Environment setup
+├── LICENSE                      MIT
+├── .gitignore                   Python + data files ignored
+├── requirements.txt             Core Python stack
+│
+├── notebooks/                   Weekly learning notebooks, one folder per phase
+│   ├── phase1-foundations/          Python, NumPy, pandas, time-series indexing
+│   ├── phase2-image-cnns/           Image classification, transfer learning
+│   ├── phase3-signal-cnns/          1D CNNs, ECG, EEG, biomedical signals
+│   ├── phase4-audio-ml/             Mel-spectrograms, audio classification
+│   └── phase5-fusion-calibration/   Multi-modal fusion, calibration, fairness
+│
+├── projects/                    Portfolio projects
+│   ├── kramer-classifier/           Image CNN for jaundice severity — active sprint
+│   ├── ecg-arrhythmia/              1D CNN on PhysioNet 2017 (Phase 3 capstone)
+│   └── sepsis-early-warning/        Multi-modal fusion (anchor / Phase 5 capstone)
+│
+└── resources/                   Reading list, dataset links, tooling notes
+    ├── reading-list.md
+    ├── datasets.md
+    └── tooling.md
 ```
 
-Each phase folder has a `NOTES.md` with running observations.
+---
 
-## Setup
+## The plan in one paragraph
 
-See [SETUP.md](SETUP.md) for how to install dependencies and launch JupyterLab.
+Sixteen weeks across five phases: foundations (Python, pandas, time-series indexing), image CNNs (transfer learning, fine-tuning), 1D signal CNNs (ECG, EEG, biomedical signals), audio ML (mel-spectrograms), and multi-modal fusion with calibration and fairness analysis. Each phase has weekly notebooks and ends with a portfolio-grade project. The full plan, with weekly checkpoints, datasets, and required reading, is in [STUDY_PLAN.md](STUDY_PLAN.md).
+
+A compressed 8-day sprint is currently front-loaded inside Phase 1 to ship the Kramer prototype on an accelerated timeline. The regular Phase 1 reading schedule resumes after the sprint demo.
+
+---
+
+## Anchor project
+
+A multi-modal neonatal sepsis early-warning system that fuses physiological time-series (ECG-derived HRV) with computer vision (movement quality), produces calibrated probability outputs, and includes demographic subgroup fairness analysis. Validated against PhysioNet 2019 Sepsis Challenge open data.
+
+This is the direct public-data analog of a real clinical alert in the production system. It exercises every major skill in the plan: 1D signal CNNs, classical feature engineering, video CNNs, late fusion, probability calibration, SHAP explainability, time-series cross-validation, and subgroup fairness analysis.
+
+---
+
+## Phase summary
+
+| Phase | Weeks | Focus | Capstone |
+|---|---|---|---|
+| 1 — Foundations | 1–3 | Python, NumPy, pandas, time-series indexing | Rolling HRV from synthetic vitals |
+| 2 — Image CNNs | 4–7 | Transfer learning, fine-tuning, augmentation | Kramer classifier (sprint v0 + deeper PyTorch v1) |
+| 3 — Signal CNNs | 8–11 | 1D CNNs, spectrograms, signal processing | ECG arrhythmia classifier (PhysioNet 2017) |
+| 4 — Audio ML | 12–13 | Mel-spectrograms, audio CNNs | Cry / respiratory sound classifier |
+| 5 — Fusion & Calibration | 14–16 | Late fusion, calibration, SHAP, fairness | Multi-modal sepsis early-warning system |
+
+---
+
+## Why these specific projects
+
+The portfolio is structured to exercise the four skill domains that show up in real clinical decision support systems, in order of leverage:
+
+- **Image CNNs** anchor the largest cluster of specialist models in clinical computer vision: skin perfusion, jaundice zones, respiratory retraction, abdominal distension, thermal mottling, and more. Transfer learning from a pretrained backbone (ResNet, EfficientNet) is the same technique across all of them.
+- **1D signal CNNs** anchor cardiac and respiratory waveform analysis — the backbone of any continuous monitoring system.
+- **Audio ML** is technique-adjacent to image CNNs (mel-spectrograms feed 2D CNNs) and covers cry analysis and respiratory sounds.
+- **Fusion and calibration** is where individual model outputs become actionable clinical alerts. It is the underrated layer that separates "person who trains CNNs" from "person who builds clinical decision systems."
+
+Underlying tooling — PyTorch, scikit-learn, pandas, SHAP, MLflow — is identical to general ML roles. Medical AI is a premium specialization, not a narrowing.
+
+---
+
+## Progress tracker
+
+| Milestone | Target | Status |
+|---|---|---|
+| McKinney Ch. 4 (NumPy) | Week 1 | ✅ done |
+| McKinney Ch. 5 (pandas intro) | Week 1 | ✅ done |
+| Kramer prototype demoed | End of compressed sprint | 🚧 in progress |
+| Rolling HRV notebook | End of Week 3 | ⏸️ post-sprint |
+| Kramer v1 (deeper PyTorch) | End of Week 7 | — |
+| ECG arrhythmia classifier | End of Week 11 | — |
+| Audio classifier | End of Week 13 | — |
+| Multi-modal sepsis early-warning | End of Week 16 | — |
+
+Detailed weekly notes live in each phase folder's `NOTES.md`.
+
+---
+
+## Tooling
+
+- Python 3.11 on macOS, `venv` per project from Phase 2 onward
+- VS Code with Jupyter extension
+- PyTorch, torchvision, fastai, scikit-learn, pandas, NumPy
+- Signals: SciPy, `wfdb`, `librosa`
+- Explainability and fairness: SHAP, Captum, Fairlearn
+- Experiment tracking: Weights & Biases from Phase 3 onward
+- Version control: GitHub Desktop, one commit per study session
+
+---
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
