@@ -40,6 +40,6 @@ def get_dataloaders(data_dir: str, batch_size: int = 32):
             dataset,
             batch_size=batch_size,
             shuffle=(split == 'train'),
-            num_workers=2,
+            num_workers=0,
         )
     return splits['train'], splits['val'], splits['test']
