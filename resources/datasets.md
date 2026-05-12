@@ -15,8 +15,8 @@ For pandas/time-series practice, generate synthetic vital signs traces or use an
 | Dataset | Use | Access |
 |---|---|---|
 | Oxford-IIIT Pet Dataset | fast.ai Lesson 1 reproduction | Open, ~800MB |
-| ISIC Archive (Skin Lesions) | Transfer learning technique on medical imaging | Free with registration |
-| Public neonatal jaundice photo collections | Kramer classifier prototype | Search Kaggle and academic repositories; small sets exist |
+| HAM10000 (ISIC 2018 Task 3) | Kramer classifier prototype — transfer learning on skin lesion imagery | Harvard Dataverse, free, no registration. [doi:10.7910/DVN/DBW86T](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T). Download `dataverse_files.zip` (~3GB), unzip, then unzip `HAM10000_images_part_1.zip` and `part_2.zip` into a single `images/` folder. Run `src/prepare_data.py` to split into `data/train/val/test/`. |
+| Public neonatal jaundice photo collections | Future Kramer v1 if usable data found | Search Kaggle and academic repositories; small sets exist |
 | ImageNet (pretrained weights) | Backbone for transfer learning | No download; via `torchvision.models` |
 
 ---
