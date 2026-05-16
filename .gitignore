@@ -3,6 +3,7 @@ textbooks/
 
 # Personal context for Claude (contains internal Corvita references — never push)
 prevtexts.md
+CLAUDE.md
 
 
 # Data files (public datasets are downloaded fresh, not committed)

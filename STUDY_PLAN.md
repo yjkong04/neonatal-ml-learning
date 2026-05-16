@@ -291,3 +291,11 @@ Underlying tooling (PyTorch, MLflow, SHAP, scikit-learn, pandas) is identical to
 ---
 
 *This plan is a living document. The compressed sprint section is the active focus; the rest is the long-term roadmap.*
+
+
+### joe
+
+Demo wrapper app — small Streamlit or Gradio app that loads your trained Kramer model and lets someone drop in an image to get a prediction + confidence. Makes the boss demo land much harder, and it's pure web/infra work, not ML. Highest leverage.
+Repo polish + CI — GitHub Actions to lint notebooks, run nbstripout so outputs don't bloat the repo, maybe a badge or two. Makes the public repo look professional to anyone (boss, recruiters) who clicks through.
+Reproducibility setup — a proper uv or conda env file pinned to versions, optional Dockerfile, a make setup target. So someone (including you on a new machine) can clone and run in one command.
+Eval dashboard — once you have a trained model, he could build a small script/notebook that takes any model checkpoint and spits out confusion matrix + per-class accuracy + a few misclassified examples as a PNG report. You define what to measure (the ML thinking); he builds the plumbing.
