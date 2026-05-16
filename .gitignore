@@ -4,6 +4,7 @@ textbooks/
 # Personal context for Claude (contains internal Corvita references — never push)
 prevtexts.md
 
+
 # Data files (public datasets are downloaded fresh, not committed)
 *.csv
 *.tsv
@@ -51,5 +52,6 @@ mlruns/
 # Secrets
 .env
 .env.local
-
+.claude
 DONTLOOK.txt
+
