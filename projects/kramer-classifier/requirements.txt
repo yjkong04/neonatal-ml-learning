@@ -1,7 +1,9 @@
 torch
 torchvision
+fastai
 Pillow
 scikit-learn
 matplotlib
 numpy
+pandas
 jupyterlab
