@@ -1,6 +1,6 @@
 # Setup
 
-How to get this repo running on a fresh machine.
+How to get this repo running on a new machine.
 
 ## Prerequisites
 

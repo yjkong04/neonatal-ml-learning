@@ -6,7 +6,7 @@
 Same technique as the production neonatal jaundice classifier (pretrained backbone, fine-tuned classifier).
 The training pipeline is identical; the dataset is adult skin lesions, not neonatal jaundice.
 
-## Data setup (run once on a fresh clone)
+## Data setup (run once on a fresh machine)
 
 **1. Download HAM10000** from Harvard Dataverse (free, no login):
 https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T
