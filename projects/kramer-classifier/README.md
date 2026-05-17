@@ -147,7 +147,7 @@ pip install -r requirements.txt           # this requirements.txt is pinned
 jupyter lab notebooks/
 ```
 
-Run notebooks in order: 01 → 02 → 03. Training notebook 02 takes ~10-15 min on Apple Silicon (MPS); CPU is slower.
+Run notebooks in order: 01 → 02 → 03.
 
 ## Success criteria
 
