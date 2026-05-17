@@ -2,8 +2,8 @@
 
 ## Dataset
 
-**ISIC skin lesion dataset (Option B)** — transfer learning on dermoscopy imagery.
-Same technique as the production `cnn_kramer` (pretrained backbone, fine-tuned classifier).
+**HAM10000** (Harvard Dataverse) — transfer learning on dermoscopy imagery as a proxy for neonatal jaundice photos.
+Same technique as the production neonatal jaundice classifier (pretrained backbone, fine-tuned classifier).
 The training pipeline is identical; the dataset is adult skin lesions, not neonatal jaundice.
 
 ## Data setup (run once on a fresh clone)

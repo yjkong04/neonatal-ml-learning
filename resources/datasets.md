@@ -28,7 +28,7 @@ For pandas/time-series practice, generate synthetic vital signs traces or use an
 | PhysioNet/CinC 2017 Challenge | AF detection from short ECG segments | Open, ~700MB. [physionet.org/content/challenge-2017](https://physionet.org/content/challenge-2017/) |
 | PTB-XL | Large public ECG benchmark with diagnostic labels | Open, ~3GB. [physionet.org/content/ptb-xl](https://physionet.org/content/ptb-xl/) |
 | MIT-BIH Arrhythmia Database | Classic ECG benchmark | Open, ~75MB |
-| ICBHI 2017 Respiratory Sound Database | For `cnn_resp` proxy work | Open with registration |
+| ICBHI 2017 Respiratory Sound Database | For respiratory waveform proxy work | Open with registration |
 | MIMIC-IV-WDB (Waveform Database) | High-resolution ICU waveforms | **Credentialed access required** — complete CITI training course first |
 
 ---
