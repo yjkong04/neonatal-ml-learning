@@ -8,7 +8,7 @@ A neonatal jaundice severity classifier based on the Kramer dermal staging syste
 
 ## Honest framing (read this first)
 
-This is a learning project, not a deployable model. Public neonatal jaundice imagery is sparse, so I'm training on the HAM10000 skin lesion dataset as a stand-in. The model architecture (pretrained ResNet50 with a fine-tuned classifier head), the training loop, and the evaluation pipeline are the same techniques the production `production-jaundice-classifier` will use. The main difference is the training data — adult dermoscopy images instead of neonatal jaundice photos.
+This is a learning project, not a deployable model. Public neonatal jaundice imagery is sparse, so I'm training on the HAM10000 skin lesion dataset as a stand-in. The model architecture (pretrained ResNet50 with a fine-tuned classifier head), the training loop, and the evaluation pipeline are the same techniques the production neonatal jaundice classifier uses. The main difference is the training data — adult dermoscopy images instead of neonatal jaundice photos.
 
 **What this project demonstrates:** end-to-end image classification, transfer learning, handling severe class imbalance, evaluation beyond raw accuracy.
 
@@ -28,7 +28,7 @@ Higher zones correspond to higher serum bilirubin levels and greater clinical ur
 
 ## Dataset — HAM10000
 
-Harvard Dataverse, ~10k dermoscopy images across 7 lesion classes. After a stratified 70/15/15 split: 5229 train / 1120 val / 1121 test. Severely imbalanced — `nv` (melanocytic nevi) is ~72% of training data, `df` (dermatofibroma) is <2%. That imbalance is useful here: it mirrors the dynamic `production-jaundice-classifier` will face, where most neonatal images will be healthy/low-zone and high-severity zones are rare.
+Harvard Dataverse, ~10k dermoscopy images across 7 lesion classes. After a stratified 70/15/15 split: 5229 train / 1120 val / 1121 test. Severely imbalanced — `nv` (melanocytic nevi) is ~72% of training data, `df` (dermatofibroma) is <2%. That imbalance is useful here: it mirrors the dynamic the production model will face, where most neonatal images will be healthy/low-zone and high-severity zones are rare.
 
 Data setup instructions in [NOTES.md](NOTES.md). `data/` is gitignored — images are never committed.
 
@@ -39,11 +39,13 @@ Data setup instructions in [NOTES.md](NOTES.md). `data/` is gitignored — image
 3. Train ResNet50 with the backbone frozen, two runs back-to-back. See [notebooks/02-baseline-resnet.ipynb](notebooks/02-baseline-resnet.ipynb):
    - **Run 1** — no imbalance correction. Watch it fail on minority classes.
    - **Run 2** — class-weighted cross-entropy. Same architecture, same data, same LR. Compare.
-4. Held-out test-set evaluation on the better run. *(in progress)*
-5. Calibration analysis — reliability diagram, ECE. *(in progress)*
-6. Skin-tone fairness audit using a brightness proxy. See [notebooks/03-skin-tone-fairness.ipynb](notebooks/03-skin-tone-fairness.ipynb). *(in progress)*
+4. Held-out test-set evaluation on the winning run. *(done — see notebook 03 Part A)*
+5. Calibration analysis — reliability diagram, ECE. *(done — see notebook 03 Part B)*
+6. Skin-tone fairness audit using a brightness proxy. See [notebooks/03-skin-tone-fairness.ipynb](notebooks/03-skin-tone-fairness.ipynb). *(done — Part C)*
 
-## Results so far (validation set)
+## Results
+
+### Validation set — Run 1 vs Run 2 (the class-weighting comparison)
 
 | Metric | Run 1 — no weighting | Run 2 — class-weighted |
 |---|---|---|
@@ -58,12 +60,48 @@ Run 1 looks better on raw accuracy, but it's mostly predicting `nv` for everythi
 
 ![Run 1 vs Run 2 confusion matrices](results/comparison.png)
 
+### Held-out test — Run 2 (the winning model)
+
+Test accuracy **0.7244**, macro-F1 **0.474**. Slightly *higher* than val (0.7027), so no overfitting.
+
+| class | test recall | precision | support |
+|---|---|---|---|
+| `nv` | 0.789 | 0.973 | 811 |
+| `mel` | 0.587 | 0.289 | 92 |
+| `bcc` | 0.592 | 0.475 | 49 |
+| `bkl` | 0.550 | 0.488 | 109 |
+| `akiec` | 0.543 | 0.463 | 35 |
+| `vasc` | 0.571 | 0.320 | 14 |
+| `df` | 0.182 | 0.077 | 11 |
+
+`df` is the worst class on both axes (when the model says `df` it's wrong 92% of the time, and it only catches 18% of true `df`). But test support for `df` and `vasc` is in the low double digits, so per-class numbers swing several percentage points per misclassification — quote them with support attached.
+
+### Calibration
+
+ECE (10 bins) **= 0.0833**. Mean confidence 0.6418, mean accuracy 0.7244 — the model is **underconfident** on average (gap ≈ -8pp). The class weighting that fixed minority-class recall also spread probability mass across classes, lowering the max-softmax confidence per prediction without changing the argmax.
+
+![Reliability diagram](results/calibration_reliability.png)
+
+The production validation gate for this kind of model is ECE ≤ 0.04, so this prototype is roughly 2× over that bar. Temperature scaling on a held-out calibration split would be the standard fix.
+
+### Skin-tone fairness (brightness proxy — see caveats)
+
+| brightness bin | accuracy | mean confidence | n |
+|---|---|---|---|
+| dark | 0.751 | 0.624 | 374 |
+| medium | 0.735 | 0.668 | 373 |
+| light | 0.687 | 0.633 | 374 |
+
+6.4pp gap between best (dark) and worst (light) bins. Counterintuitive on the surface, but in HAM10000 brightness mostly tracks **lesion color** (high-contrast lesions against pale skin tend to fall in the "light" bin), not patient skin tone. So this is the technique demo, not a finding: the analysis pipeline works, the proxy is too weak to draw conclusions about real skin-tone bias. A real audit needs Fitzpatrick-labeled neonatal data.
+
+![Per-tone recall](results/fairness_recall_by_tone.png)
+
 ## Limitations
 
 - HAM10000 is **adult dermoscopy imagery**, not **neonatal jaundice**. Visual cues overlap (skin tone, pigmentation, color gradients), but the clinical task is different. A model trained here cannot be used clinically.
-- All numbers above are on the validation set. Held-out test evaluation is pending.
-- HAM10000 ships no Fitzpatrick skin tone labels, so the fairness notebook uses a brightness proxy — a real fairness audit would require labeled tones and a representative dataset. Documenting this limit is part of the point.
-- No calibration analysis yet; predicted probabilities may not reflect true confidence.
+- HAM10000 ships no Fitzpatrick skin tone labels, so the fairness notebook uses a brightness proxy that mostly tracks lesion color rather than patient skin tone. The pipeline is the right pipeline; the proxy is weak.
+- ECE is roughly 2× the production gate. The prototype demonstrates *measuring* calibration; recalibration (temperature scaling) is a natural next step.
+- Per-class support on `df` (11) and `vasc` (14) is too small to read those numbers with much confidence.
 
 ## Structure
 
@@ -77,7 +115,7 @@ kramer-classifier/
 ├── notebooks/
 │   ├── 01-eda.ipynb                done
 │   ├── 02-baseline-resnet.ipynb    done (Run 1 + Run 2)
-│   └── 03-skin-tone-fairness.ipynb in progress
+│   └── 03-skin-tone-fairness.ipynb done (test eval + calibration + fairness)
 ├── src/
 │   ├── prepare_data.py             stratified split
 │   ├── data.py                     dataloaders + augmentation
@@ -93,20 +131,23 @@ kramer-classifier/
 
 ## What's next
 
-- [ ] Held-out test-set evaluation on Run 2 (the winning model)
-- [ ] Reliability diagram + ECE for calibration
-- [ ] Skin-tone fairness notebook — brightness-binned per-class recall
-- [ ] Final README pass with test-set numbers
+- [x] Held-out test-set evaluation on Run 2 (the winning model)
+- [x] Reliability diagram + ECE for calibration
+- [x] Skin-tone fairness notebook — brightness-binned per-class recall
+- [x] Final README pass with test-set numbers
+- [ ] Temperature-scaling recalibration on a held-out split (target ECE ≤ 0.04)
+- [ ] 10-minute demo notebook that walks through Run 1 → Run 2 → test → calibration → fairness in one read
 
 ## Reproducing
 
 ```bash
-pip3 install -r requirements.txt
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt           # this requirements.txt is pinned
 # follow NOTES.md to download HAM10000 and run src/prepare_data.py
 jupyter lab notebooks/
 ```
 
-Run notebooks in order: 01 → 02 → 03.
+Run notebooks in order: 01 → 02 → 03. Training notebook 02 takes ~10-15 min on Apple Silicon (MPS); CPU is slower.
 
 ## Success criteria
 

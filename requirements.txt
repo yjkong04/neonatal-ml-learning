@@ -1,44 +1,45 @@
-# Core stack — install everything with: pip3 install -r requirements.txt
+# Core stack — install everything with: pip install -r requirements.txt
+# Versions are pinned to the set the notebooks actually run against.
 # Phase 1 only needs numpy / pandas / matplotlib / jupyterlab; the rest
 # can be installed lazily as later phases begin.
 
 # --- Numerical (Phase 1+) ---
-numpy
-scipy
-pandas
+numpy==2.4.4
+scipy==1.15.3
+pandas==3.0.2
 
 # --- Visualization (Phase 1+) ---
-matplotlib
-seaborn
-plotly
+matplotlib==3.10.9
+seaborn==0.13.2
+plotly==6.7.0
 
 # --- Notebook (Phase 1+) ---
-jupyterlab
-ipywidgets
+jupyterlab==4.5.7
+ipywidgets==8.1.8
 
 # --- Classical ML (Phase 2+) ---
-scikit-learn
-xgboost
+scikit-learn==1.8.0
+xgboost==3.2.0
 
 # --- Deep learning (Phase 2+) ---
-torch
-torchvision
-torchaudio
-fastai
+torch==2.11.0
+torchvision==0.26.0
+torchaudio==2.11.0
+fastai==2.8.7
+Pillow==12.2.0
 
 # --- Signals (Phase 3+) ---
-wfdb
-librosa
-pyhrv
+wfdb==4.3.1
+librosa==0.11.0
+pyhrv==0.4.1
 
 # --- Audio (Phase 4+) ---
-# librosa already covers most needs; add soundfile if needed
-soundfile
+soundfile==0.13.1
 
 # --- Explainability + fairness (Phase 5) ---
-shap
-captum
-fairlearn
+shap==0.51.0
+captum==0.9.0
+fairlearn==0.13.0
 
 # --- Experiment tracking (Phase 3+) ---
-wandb
+wandb==0.26.1

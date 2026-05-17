@@ -1,6 +1,6 @@
 # Phase 2 — Image CNNs
 
-**Week 2** — Train and fine-tune image classifiers. Build a `production-jaundice-classifier` prototype.
+**Week 2** — Train and fine-tune image classifiers. Build a neonatal jaundice (Kramer zone) prototype.
 
 ## Goal
 

@@ -13,9 +13,9 @@ All work is on public datasets (PhysioNet, ISIC, Donate-a-Cry, ESC-50, etc.) or 
 
 ## Current focus — Kramer classifier sprint
 
-The active work is an 8-day compressed sprint to ship a working transfer-learning prototype for neonatal jaundice severity (Kramer zone) classification. This is the production analog of `CNN-Kramer`, one of the specialist models in a multi-modal hierarchical clinical inference network I work on professionally.
+The active work is an 8-day compressed sprint to ship a working transfer-learning prototype for neonatal jaundice severity (Kramer zone) classification. This is the public-data analog of a production neonatal computer-vision model I work on professionally.
 
-**Honest scope:** prototype of the technique, not a deployable model. Trained on public skin imagery as a stand-in for real neonatal jaundice data. The architecture and training pipeline mirror what the production version will use (PyTorch training, exportable to ONNX for TensorRT compilation on edge AI hardware). Clinical safety classification of the production analog is IEC 62304 Class B.
+**Honest scope:** prototype of the technique, not a deployable model. Trained on public skin imagery as a stand-in for real neonatal jaundice data. The architecture and training pipeline (PyTorch transfer learning, exportable to ONNX for edge AI deployment) mirror the production approach.
 
 Status and code: [`projects/kramer-classifier/`](projects/kramer-classifier/).
 
@@ -99,7 +99,7 @@ Underlying tooling — PyTorch, scikit-learn, pandas, SHAP, MLflow — is identi
 |---|---|---|
 | McKinney Ch. 4 (NumPy) | Week 1 | ✅ done |
 | McKinney Ch. 5 (pandas intro) | Week 1 | ✅ done |
-| Kramer prototype demoed | End of compressed sprint | 🚧 in progress |
+| Kramer prototype demoed | End of compressed sprint | 🚧 evaluation complete, writing up |
 | Rolling HRV notebook | End of Week 3 | ⏸️ post-sprint |
 | Kramer v1 (deeper PyTorch) | End of Week 7 | — |
 | ECG arrhythmia classifier | End of Week 11 | — |

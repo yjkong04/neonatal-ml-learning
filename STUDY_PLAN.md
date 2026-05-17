@@ -1,9 +1,9 @@
-# Data Science Study Plan — NOA-AI Aligned
+# Data Science Study Plan — Neonatal ML
 
 **Author:** Yejin Kong
 **Started:** April 2026
 **Last revised:** May 2026 — added compressed sprint to ship Kramer prototype
-**Goal:** Build production-relevant data science skills aligned with Corvita's NOA-AI roadmap, transferable to big tech / general ML opportunities.
+**Goal:** Build production-relevant data science skills aligned with the medical-AI work I do professionally, transferable to big tech / general ML opportunities.
 
 ---
 
@@ -21,7 +21,7 @@ Phase 1 in progress.
 
 **Why this exists:** My boss wants to see concrete proof by end of next week that my learning translates to real technical work. Rather than dropping the foundations work, I'm running an 8-day compressed sprint that front-loads enough basics to ship a working trained model. The original Phase 1 schedule resumes after the demo.
 
-**The deliverable:** A working image classifier prototype for neonatal jaundice severity, demonstrated end-to-end, using the same transfer-learning techniques `production-jaundice-classifier` will eventually use in production.
+**The deliverable:** A working image classifier prototype for neonatal jaundice severity, demonstrated end-to-end, using the same transfer-learning techniques the production version will use.
 
 **Honest scope:** This is a learning prototype, not a deployable model. Trained on public skin imagery as a stand-in for real neonatal jaundice data. Architecture and training pipeline mirror what the production version would use.
 
@@ -60,16 +60,16 @@ Phase 1 in progress.
 
 ## Why the long-term plan looks the way it does
 
-NOA-AI is a multi-modal sensor fusion system, not a single-modality CNN classifier. The clinical alerts (HIE, RDS, PDA, Hyperbili, Sepsis) are all multi-parameter — they fuse outputs from specialist models (CNNs on images, signals, audio) with rule-based scorers (Sarnat, Bhutani, nSOFA, HeRO). The platform is mature; the model fleet is the bottleneck.
+The production system this work supports is a multi-modal sensor fusion stack, not a single-modality CNN classifier. Its clinical alerts (HIE, RDS, PDA, hyperbilirubinemia, sepsis) are all multi-parameter — they fuse outputs from specialist models (CNNs on images, signals, audio) with rule-based scorers (Sarnat, Bhutani, nSOFA, HeRO). The orchestration platform is mature; the specialist-model fleet is the bottleneck.
 
-This plan targets four skill domains in order of leverage to the codebase:
+This plan targets four skill domains in order of leverage:
 
 1. **Foundations** — Python, pandas, NumPy, time-series indexing
-2. **Image CNNs** — anchors `cnn_skin`, `production-jaundice-classifier`, `cnn_neurovision`, `cnn_retraction`, `cnn_abdominal`
-3. **1D signal CNNs** — anchors `cnn_cardio`, `cnn_resp`, `production-emg-module`, supports the existing `cnn_eeg`
-4. **Fusion & calibration** — the layer where the actual NOA alerts live (ARK-107 through ARK-114)
+2. **Image CNNs** — anchors skin / jaundice / neurovision / retraction / abdominal classifiers
+3. **1D signal CNNs** — anchors cardiac and respiratory waveform models; supports existing EEG work
+4. **Fusion & calibration** — the layer where the multi-modal clinical alerts actually live
 
-Audio ML (`cnn_cry`, `cnn_pphn`) is folded in as a shorter side-phase since it's technique-adjacent to image CNNs (mel-spectrograms → 2D CNN).
+Audio ML (cry, respiratory sounds) is folded in as a shorter side-phase since it's technique-adjacent to image CNNs (mel-spectrograms → 2D CNN).
 
 ---
 
@@ -77,7 +77,7 @@ Audio ML (`cnn_cry`, `cnn_pphn`) is folded in as a shorter side-phase since it's
 
 **Multi-modal neonatal sepsis early-warning system.** Fuses HRV trend (1D ECG CNN) + temperature variance (tabular features) + movement quality (video CNN), with calibrated probability outputs and demographic subgroup fairness analysis. Validated on PhysioNet 2019 Sepsis Challenge data.
 
-Direct analog to ARK-114 in Corvita's alarm registry. Hits 1D CNNs, classical feature engineering, video CNNs, fusion, calibration, and time-series validation — every major skill in this plan — in one project.
+Direct public-data analog of a multi-parameter sepsis alarm in the production system. Hits 1D CNNs, classical feature engineering, video CNNs, fusion, calibration, and time-series validation — every major skill in this plan — in one project.
 
 ---
 
@@ -110,8 +110,8 @@ Direct analog to ARK-114 in Corvita's alarm registry. Hits 1D CNNs, classical fe
 
 **Goal:** Train and fine-tune image classification models. Build the Kramer classifier (compressed sprint version) and follow up with the deeper PyTorch version.
 
-### Why this collapses five target CNNs
-`production-jaundice-classifier`, `cnn_skin`, `cnn_neurovision`, `cnn_retraction`, `cnn_thermal_mottling`, `cnn_abdominal`, `cnn_pulse_pressure`, `cnn_precordial` are all 2D image classification (or thermal multi-channel image). The technique — transfer learning from a pretrained ResNet/EfficientNet — is identical across all of them.
+### Why this collapses several target models
+Most of the image-based specialist CNNs in the production pipeline — jaundice zones, skin perfusion, neuro-vision, respiratory retraction, abdominal distension, thermal mottling, pulse-pressure, precordial movement — are all 2D image classification (or thermal multi-channel image). The technique — transfer learning from a pretrained ResNet/EfficientNet — is identical across all of them.
 
 ### Resources
 - fast.ai *Practical Deep Learning for Coders* — Lessons 1–4
@@ -138,7 +138,7 @@ Direct analog to ARK-114 in Corvita's alarm registry. Hits 1D CNNs, classical fe
 
 ## Phase 3 — 1D signal CNNs (Weeks 8–11)
 
-**Goal:** Train models on biomedical time-series. Build foundations for `cnn_cardio` and `cnn_resp`.
+**Goal:** Train models on biomedical time-series. Build foundations for cardiac and respiratory waveform classification.
 
 ### Resources
 - *Forecasting: Principles and Practice* (Hyndman & Athanasopoulos) — free online
@@ -152,7 +152,7 @@ Direct analog to ARK-114 in Corvita's alarm registry. Hits 1D CNNs, classical fe
 - **Week 11:** HRV feature engineering (SDNN, RMSSD, pNN50, frequency-domain) combined with deep features
 
 ### Public datasets
-- **PhysioNet/CinC 2017 Challenge** — AF detection, anchor for `cnn_cardio`
+- **PhysioNet/CinC 2017 Challenge** — AF detection, anchor for the cardiac waveform classifier
 - **PTB-XL** — large public ECG benchmark
 - **MIT-BIH Arrhythmia Database** — classic ECG benchmark
 - **MIMIC-IV-WDB** — high-resolution ICU waveforms (credentialed access)
@@ -167,7 +167,7 @@ Direct analog to ARK-114 in Corvita's alarm registry. Hits 1D CNNs, classical fe
 
 ## Phase 4 — Audio ML (Weeks 12–13)
 
-**Goal:** Audio classification via spectrograms. Foundations for `cnn_cry` and `cnn_pphn`.
+**Goal:** Audio classification via spectrograms. Foundations for infant-cry and respiratory-sound classifiers.
 
 ### Resources
 - `librosa` library tutorials
@@ -221,27 +221,6 @@ See [resources/reading-list.md](resources/reading-list.md) for full list. Priori
 
 ---
 
-## NOA-AI target CNN map
-
-| Target CNN | Modality | Public proxy dataset | Phase |
-|---|---|---|---|
-| `cnn_skin` | RGB image | ISIC + neonatal jaundice photos | 2 |
-| `production-jaundice-classifier` | RGB image | Same as above | 2 (sprint anchor) |
-| `cnn_neurovision` | RGB video | UCF-101, GMA if accessible | 2+ |
-| `cnn_retraction` | RGB video | Custom synthetic | 2 |
-| `cnn_thermal_mottling` | Thermal image | Public thermal datasets | 2 |
-| `cnn_abdominal` | RGB image | Technique transfer | 2 |
-| `cnn_pulse_pressure` | RGB video | Custom | 2 |
-| `cnn_precordial` | RGB video | Custom | 2 |
-| `cnn_cardio` | 1D ECG | PhysioNet 2017, PTB-XL, MIT-BIH | 3 |
-| `cnn_resp` | 1D respiratory | ICBHI 2017 | 3 |
-| `production-emg-module` | 1D EMG | Ninapro | 3 |
-| `cnn_eeg` (runs) | 1D EEG / aEEG | TUH EEG, CHB-MIT | 3 reference |
-| `cnn_cry` | Audio | Donate-a-Cry | 4 |
-| `cnn_pphn` | Audio + multi-modal | ICBHI + fusion | 4-5 |
-
----
-
 ## Tooling
 
 - **Repo:** public GitHub, frequent commits
@@ -291,11 +270,3 @@ Underlying tooling (PyTorch, MLflow, SHAP, scikit-learn, pandas) is identical to
 ---
 
 *This plan is a living document. The compressed sprint section is the active focus; the rest is the long-term roadmap.*
-
-
-### joe
-
-Demo wrapper app — small Streamlit or Gradio app that loads your trained Kramer model and lets someone drop in an image to get a prediction + confidence. Makes the boss demo land much harder, and it's pure web/infra work, not ML. Highest leverage.
-Repo polish + CI — GitHub Actions to lint notebooks, run nbstripout so outputs don't bloat the repo, maybe a badge or two. Makes the public repo look professional to anyone (boss, recruiters) who clicks through.
-Reproducibility setup — a proper uv or conda env file pinned to versions, optional Dockerfile, a make setup target. So someone (including you on a new machine) can clone and run in one command.
-Eval dashboard — once you have a trained model, he could build a small script/notebook that takes any model checkpoint and spits out confusion matrix + per-class accuracy + a few misclassified examples as a PNG report. You define what to measure (the ML thinking); he builds the plumbing.

@@ -16,7 +16,7 @@ Reference while reading *Python for Data Analysis* (3rd ed.). Reading order: **C
 
 ### Tier 1 — must do (used daily downstream)
 
-| # | Concept | Why it matters for NOA-AI work |
+| # | Concept | Why it matters for neonatal ML work |
 |---|---------|-------------------------------|
 | 1 | Slicing & views vs. copies | ECG windowing breaks silently if you mutate a view |
 | 2 | Boolean indexing | Filtering noisy samples, masking images |
@@ -93,7 +93,7 @@ Re-run with the same seed — confirm it's identical.
 
 ### Tier 1 — must do (required before Ch 7)
 
-| # | Concept | Why it matters for NOA-AI work |
+| # | Concept | Why it matters for neonatal ML work |
 |---|---------|-------------------------------|
 | 1 | Series and DataFrame construction | Mental model for every pandas operation downstream |
 | 2 | `.loc` (label-based) vs `.iloc` (position-based) indexing | Getting rows/columns wrong silently is a common bug — know the difference cold |
@@ -149,7 +149,7 @@ Skip everything on Excel, HDF5, JSON, and web scraping — not relevant to the p
 
 ### Tier 1 — must do (used daily downstream)
 
-| # | Concept | Why it matters for NOA-AI work |
+| # | Concept | Why it matters for neonatal ML work |
 |---|---------|-------------------------------|
 | 1 | `dropna` / `isnull` / `notnull` | Real vitals tables have gaps — you need to find and decide what to do with them |
 | 2 | `fillna` (forward-fill, backfill, constant) | ECG/SpO2 dropout: filling with last known value vs. interpolation is a clinical decision |

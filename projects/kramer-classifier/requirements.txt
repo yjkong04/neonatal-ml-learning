@@ -1,9 +1,11 @@
-torch
-torchvision
-fastai
-Pillow
-scikit-learn
-matplotlib
-numpy
-pandas
-jupyterlab
+# Pinned to the set the Kramer notebooks actually run against.
+# Use this requirements.txt — not the top-level one — for the Kramer demo.
+torch==2.11.0
+torchvision==0.26.0
+fastai==2.8.7
+Pillow==12.2.0
+scikit-learn==1.8.0
+matplotlib==3.10.9
+numpy==2.4.4
+pandas==3.0.2
+jupyterlab==4.5.7
