@@ -141,7 +141,8 @@ kramer-classifier/
 │   ├── 01-eda.ipynb                done
 │   ├── 02-baseline-resnet.ipynb    done (Run 1 + Run 2)
 │   ├── 03-skin-tone-fairness.ipynb done (test eval + calibration + fairness)
-│   └── 04-lighting-robustness.ipynb Run 3 training + brightness-bin comparison
+│   ├── 04-lighting-robustness.ipynb Run 3 training + brightness-bin comparison
+│   └── 05-temperature-scaling.ipynb post-hoc calibration, learns scalar T on val set
 ├── src/
 │   ├── prepare_data.py             stratified split
 │   ├── data.py                     dataloaders + augmentation
@@ -165,7 +166,7 @@ kramer-classifier/
 - [x] Lighting robustness — Run 3 with aggressive augmentation, brightness-bin comparison
 - [x] Final README pass with test-set numbers
 - [x] 10-minute demo notebook — [notebooks/00-demo.ipynb](notebooks/00-demo.ipynb)
-- [ ] Temperature-scaling recalibration on a held-out split (target ECE ≤ 0.04)
+- [x] Temperature-scaling recalibration — [notebooks/05-temperature-scaling.ipynb](notebooks/05-temperature-scaling.ipynb)
 
 ## Reproducing
 
