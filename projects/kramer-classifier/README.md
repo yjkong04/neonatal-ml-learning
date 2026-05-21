@@ -42,6 +42,7 @@ Data setup instructions in [NOTES.md](NOTES.md). `data/` is gitignored — image
 4. Held-out test-set evaluation on the winning run. *(done — see notebook 03 Part A)*
 5. Calibration analysis — reliability diagram, ECE. *(done — see notebook 03 Part B)*
 6. Skin-tone fairness audit using a brightness proxy. See [notebooks/03-skin-tone-fairness.ipynb](notebooks/03-skin-tone-fairness.ipynb). *(done — Part C)*
+7. **Run 3** — lighting-robust augmentation. Same class weighting as Run 2; only the training augmentation changes. Benchmarked against Run 2 using the same brightness-tertile proxy. See [notebooks/04-lighting-robustness.ipynb](notebooks/04-lighting-robustness.ipynb).
 
 ## Results
 
@@ -83,6 +84,28 @@ ECE (10 bins) **= 0.0833**. Mean confidence 0.6418, mean accuracy 0.7244 — the
 ![Reliability diagram](results/calibration_reliability.png)
 
 The production validation gate for this kind of model is ECE ≤ 0.04, so this prototype is roughly 2× over that bar. Temperature scaling on a held-out calibration split would be the standard fix.
+
+### Lighting robustness — Run 2 vs Run 3
+
+Run 3 trains with aggressive lighting augmentation on top of Run 2's class weighting:
+
+| Augmentation | Run 2 | Run 3 |
+|---|---|---|
+| ColorJitter brightness | 0.2 | 0.5 |
+| ColorJitter contrast | 0.2 | 0.5 |
+| ColorJitter saturation | 0.2 | 0.4 |
+| ColorJitter hue | — | 0.1 |
+| RandomAutocontrast | — | p=0.3 |
+| RandomEqualize | — | p=0.2 |
+| GaussianBlur | — | σ=0.1–1.5 |
+
+`brightness=0.5` means the model sees images at 50–150% of original exposure during training — covers underexposed bedside photos and overexposed fluorescent-lit nurseries.
+
+Benchmarked by brightness tertile (same proxy as the fairness audit below). A smaller gap across dark/medium/light bins = better robustness to real-world lighting variation. See [notebooks/04-lighting-robustness.ipynb](notebooks/04-lighting-robustness.ipynb) and `results/lighting_robustness_comparison.png` for the full comparison.
+
+**Production roadmap** beyond this prototype: (1) CLAHE illumination normalization at inference — no retraining needed; (2) test-time augmentation over lighting variants; (3) real validation with neonatal images under controlled lighting variation.
+
+---
 
 ### Skin-tone fairness (brightness proxy — see caveats)
 
