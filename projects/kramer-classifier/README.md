@@ -125,6 +125,7 @@ Benchmarked by brightness tertile (same proxy as the fairness audit below). A sm
 - HAM10000 ships no Fitzpatrick skin tone labels, so the fairness notebook uses a brightness proxy that mostly tracks lesion color rather than patient skin tone. The pipeline is the right pipeline; the proxy is weak.
 - ECE is roughly 2× the production gate. The prototype demonstrates *measuring* calibration; recalibration (temperature scaling) is a natural next step.
 - Per-class support on `df` (11) and `vasc` (14) is too small to read those numbers with much confidence.
+- The lighting robustness benchmark (Run 3) uses the same brightness-proxy tertiles as the fairness audit. In HAM10000 this mostly tracks lesion color rather than ambient light. The technique is right; measuring it on neonatal data captured under varied lighting is the real validation.
 
 ## Structure
 
@@ -138,7 +139,8 @@ kramer-classifier/
 ├── notebooks/
 │   ├── 01-eda.ipynb                done
 │   ├── 02-baseline-resnet.ipynb    done (Run 1 + Run 2)
-│   └── 03-skin-tone-fairness.ipynb done (test eval + calibration + fairness)
+│   ├── 03-skin-tone-fairness.ipynb done (test eval + calibration + fairness)
+│   └── 04-lighting-robustness.ipynb Run 3 training + brightness-bin comparison
 ├── src/
 │   ├── prepare_data.py             stratified split
 │   ├── data.py                     dataloaders + augmentation
@@ -149,7 +151,9 @@ kramer-classifier/
     ├── v1_training_curves.png
     ├── v1_confusion_matrix.png
     ├── v2_confusion_matrix.png
-    └── comparison.png
+    ├── v3/best_model.pt             (Run 3 checkpoint, after running notebook 04)
+    ├── comparison.png
+    └── lighting_robustness_comparison.png  (Run 2 vs Run 3 brightness-bin chart)
 ```
 
 ## What's next
@@ -157,9 +161,10 @@ kramer-classifier/
 - [x] Held-out test-set evaluation on Run 2 (the winning model)
 - [x] Reliability diagram + ECE for calibration
 - [x] Skin-tone fairness notebook — brightness-binned per-class recall
+- [x] Lighting robustness — Run 3 with aggressive augmentation, brightness-bin comparison
 - [x] Final README pass with test-set numbers
 - [ ] Temperature-scaling recalibration on a held-out split (target ECE ≤ 0.04)
-- [ ] 10-minute demo notebook that walks through Run 1 → Run 2 → test → calibration → fairness in one read
+- [ ] 10-minute demo notebook that walks through Run 1 → Run 2 → Run 3 → test → calibration → fairness in one read
 
 ## Reproducing
 
