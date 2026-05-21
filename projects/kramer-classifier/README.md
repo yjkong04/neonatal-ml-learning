@@ -137,6 +137,7 @@ kramer-classifier/
 ├── data/                           (gitignored)
 │   ├── train/  val/  test/
 ├── notebooks/
+│   ├── 00-demo.ipynb               10-minute boss demo walkthrough (start here)
 │   ├── 01-eda.ipynb                done
 │   ├── 02-baseline-resnet.ipynb    done (Run 1 + Run 2)
 │   ├── 03-skin-tone-fairness.ipynb done (test eval + calibration + fairness)
@@ -163,8 +164,8 @@ kramer-classifier/
 - [x] Skin-tone fairness notebook — brightness-binned per-class recall
 - [x] Lighting robustness — Run 3 with aggressive augmentation, brightness-bin comparison
 - [x] Final README pass with test-set numbers
+- [x] 10-minute demo notebook — [notebooks/00-demo.ipynb](notebooks/00-demo.ipynb)
 - [ ] Temperature-scaling recalibration on a held-out split (target ECE ≤ 0.04)
-- [ ] 10-minute demo notebook that walks through Run 1 → Run 2 → Run 3 → test → calibration → fairness in one read
 
 ## Reproducing
 
