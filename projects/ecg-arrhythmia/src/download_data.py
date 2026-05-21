@@ -7,30 +7,52 @@ Usage:
 
 import argparse
 import json
-import sys
+import urllib.request
 from pathlib import Path
+
+BASE_URL = "https://physionet.org/files/challenge-2017/1.0.0/training"
 
 
 def download(data_dir: Path) -> None:
-    try:
-        import wfdb
-    except ImportError:
-        sys.exit("wfdb not found — run: pip install wfdb>=4.1")
-
     data_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"Downloading PhysioNet 2017 challenge data to {data_dir} ...")
-    wfdb.dl_database("challenge-2017/1.0.0", str(data_dir))
+    print(f"Fetching file list from PhysioNet ...")
+    record_names = _fetch_record_list()
+    print(f"Found {len(record_names)} records. Downloading to {data_dir} ...")
 
-    # Verify the reference label file is present
-    ref_file = data_dir / "REFERENCE.csv"
-    if not ref_file.exists():
-        sys.exit(
-            "Download appears incomplete — REFERENCE.csv not found. "
-            "Try running the script again."
-        )
+    # Each record has a .hea header and a .mat signal file
+    extensions = [".hea", ".mat"]
+    total_files = len(record_names) * len(extensions) + 1  # +1 for REFERENCE.csv
+    downloaded = 0
 
-    _verify_and_report(data_dir, ref_file)
+    for name in record_names:
+        for ext in extensions:
+            _fetch_file(f"{BASE_URL}/{name}{ext}", data_dir / f"{name}{ext}")
+            downloaded += 1
+            if downloaded % 500 == 0:
+                print(f"  {downloaded}/{total_files} files ...")
+
+    ref_dest = data_dir / "REFERENCE.csv"
+    _fetch_file(
+        "https://physionet.org/files/challenge-2017/1.0.0/REFERENCE.csv",
+        ref_dest,
+    )
+
+    _verify_and_report(data_dir, ref_dest)
+
+
+def _fetch_record_list() -> list:
+    """Return record names by reading the WFDB index file (RECORDS)."""
+    records_url = f"{BASE_URL}/RECORDS"
+    with urllib.request.urlopen(records_url) as resp:
+        return [line.strip() for line in resp.read().decode().splitlines() if line.strip()]
+
+
+def _fetch_file(url: str, dest: Path) -> None:
+    if dest.exists():
+        return
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    urllib.request.urlretrieve(url, dest)
 
 
 def _verify_and_report(data_dir: Path, ref_file: Path) -> None:
