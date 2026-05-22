@@ -7,6 +7,7 @@ extract_features() returns the 5-element vector fed to the CNN fusion layer.
 
 import numpy as np
 import scipy.signal
+from typing import Dict, List, Optional, Tuple
 
 
 # ── Burst segmentation ────────────────────────────────────────────────────────
@@ -16,7 +17,7 @@ def find_bursts(
     fs: int,
     resp_rate_hz: float = 50 / 60,
     min_burst_s: float = 0.2,
-) -> list[tuple[int, int]]:
+) -> List[Tuple[int, int]]:
     """
     Detect inspiratory burst boundaries using the rectified EMG envelope.
     Returns list of (start_sample, end_sample) pairs.
@@ -146,7 +147,7 @@ def extract_features(signal: np.ndarray, fs: int) -> np.ndarray:
     return np.array([mean_rms, mdf_slope, spectral_comp, rms_trend, entropy], dtype=np.float32)
 
 
-def normalize_features(X_feats: np.ndarray, stats: dict | None = None) -> tuple[np.ndarray, dict]:
+def normalize_features(X_feats: np.ndarray, stats: Optional[Dict] = None) -> Tuple[np.ndarray, Dict]:
     """
     Z-score normalize a [N, 5] feature matrix.
     Pass stats from the training set to normalize val/test consistently.

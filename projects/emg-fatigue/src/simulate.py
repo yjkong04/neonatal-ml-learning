@@ -9,6 +9,7 @@ reflect increased neural drive followed by eventual exhaustion.
 import numpy as np
 import scipy.signal
 from pathlib import Path
+from typing import Optional
 
 FS = 1000          # Hz — matches emg-module
 WINDOW_S = 30      # seconds per training sample (~20-30 neonatal breaths)
@@ -27,7 +28,7 @@ def simulate_window(
     window_s: float = WINDOW_S,
     resp_rate: float = RESP_RATE,
     snr_db: float = 22.0,
-    seed: int | None = None,
+    seed: Optional[int] = None,
 ) -> np.ndarray:
     """
     Generate one 30-second synthetic EMG window with a fatigue trajectory.
@@ -118,9 +119,9 @@ def generate_dataset(
     n_samples: int = 1000,
     window_s: float = WINDOW_S,
     fs: int = FS,
-    out_dir: Path | None = None,
+    out_dir: Optional[Path] = None,
     seed: int = 42,
-) -> tuple[np.ndarray, np.ndarray]:
+) -> tuple:
     """
     Generate a dataset of synthetic EMG windows.
 
