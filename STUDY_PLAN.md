@@ -44,11 +44,28 @@ Audio ML is folded in as a shorter side-phase (mel-spectrograms → 2D CNN, tech
 - Skip Ch. 12-14 (modeling chapters) — that's what PyTorch and fast.ai are for
 
 ### *AI Engineering* — Chip Huyen
-**How to read it:** Linear first pass, then use as reference. Some chapters are more relevant to your work than others.
-- **Read fully:** evaluation (how to know if your model is good), dataset engineering, inference optimization, production systems
-- **Read for context:** foundation models, fine-tuning — less directly relevant to CNNs but builds AI engineering literacy
-- **Skim:** RAG and prompt engineering chapters — not on your critical path right now
-- **Key idea to extract from each chapter:** how does this apply to NOA-AI? Write one-paragraph notes in `textbooks/ai-engineering/`
+**How to read it:** Not linear. Hit the high-priority chapters first, then fill in context chapters, skim the rest. The book is written through an LLM/foundation model lens — you'll need to mentally translate concepts to the CNN + edge AI context of NOA-AI.
+
+**Notes format:** Jupyter notebooks in `textbooks/ai-engineering/` — markdown cells for concepts and NOA-AI connections, code cells only where there's something worth running (Ch. 9 has hands-on content; most other chapters are conceptual). Think reading journal, not coding workbook.
+
+**Read fully (high priority):**
+- **Ch. 3** — Evaluation Methodology (how to know if a model is any good — most transferable skill in the book)
+- **Ch. 4** — Evaluate AI Systems (building an eval pipeline, model selection)
+- **Ch. 8** — Dataset Engineering (data curation, augmentation, synthesis — directly relevant to building CNN training sets)
+- **Ch. 9** — Inference Optimization (quantization, model compression, latency — edge AI, exactly what ARK needs)
+- **Ch. 10** — AI Engineering Architecture (production systems, monitoring, pipelines — maps to NOA-AI's orchestration layer)
+
+**Read for context:**
+- **Ch. 2** — Understanding Foundation Models (architecture, post-training, quantization basics — builds vocabulary)
+- **Ch. 7** — Finetuning (memory math, LoRA, quantization deep-dive — relevant when CNNs move to production)
+
+**Skim:**
+- **Ch. 5** — Prompt Engineering (not on critical path)
+- **Ch. 6** — RAG and Agents (not on critical path)
+
+**Suggested reading order:** Ch. 3 → 4 → 8 → 9 → 10, then 2 and 7 for context.
+
+**Key question for each chapter:** How does this apply to NOA-AI or the ARK platform?
 
 ### *TinyML* — Pete Warden & Daniel Situnayake
 **How to read it:** Front-load the concept chapters, skim the Arduino-specific examples.
