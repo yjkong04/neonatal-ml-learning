@@ -46,7 +46,7 @@ Audio ML is folded in as a shorter side-phase (mel-spectrograms → 2D CNN, tech
 ### *AI Engineering* — Chip Huyen
 **How to read it:** Not linear. Hit the high-priority chapters first, then fill in context chapters, skim the rest. The book is written through an LLM/foundation model lens — you'll need to mentally translate concepts to the CNN + edge AI context of NOA-AI.
 
-**Notes format:** Jupyter notebooks in `textbooks/ai-engineering/` — markdown cells for concepts and NOA-AI connections, code cells only where there's something worth running (Ch. 9 has hands-on content; most other chapters are conceptual). Think reading journal, not coding workbook.
+**Notes format:** Markdown files in `notebooks/reading-notes/ai-engineering/` — concepts and NOA-AI connections in plain text, code snippets in fenced blocks where relevant (Ch. 9 has hands-on content; most other chapters are conceptual). Think reading journal, not coding workbook.
 
 **Read fully (high priority):**
 - **Ch. 3** — Evaluation Methodology (how to know if a model is any good — most transferable skill in the book)
