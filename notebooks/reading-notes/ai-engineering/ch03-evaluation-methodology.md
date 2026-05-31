@@ -75,9 +75,34 @@
 - pointwise evaluation: evaluate each model **independently** and rank by scores
 - comparative evaluation: evaluate models **against each other** and make a ranking
     - good for subjective responses
-- evaluation shouldn't always be based on preference, but sometimes on correctness
+- evaluation shouldn't always be based on preference, sometimes on correctness
 - comparative evaluation is NOT A/B testing
-    - 
+    - instead seeing outputs from multiple models at once
+- *rating algorithm* scores each model first then ranks them (more models makes it more difficult)
+    - prediction
+###### Challenges of Comparative Evaluation
+- scalability bottlenecks
+    - 1 model requires multiple model pairs for evaluation
+        - so ranking algos use *transitivity*
+            - infer that A ranks higher than C when A > B and B > C, removing one comparison
+        - won't always apply (ex. human preference isn't always transitive)
+    - adding a new model changes ranking of all existing models
+- lack of standardization and quality control 
+    - similar drawbacks as qualitative surveys
+    - crowdsourcing comparisons lacks real world context
+        - different prompting requirements
+        - generating good responses vs. retrieving relevant documents
+        - public vs. internal leaderboard
+- comparative performance to absolute performance
+    - sometimes you just need 'good enough'
+    - comparative evaluation doesn't show how much better one model is to another
+        a. model b is good, model a is bad
+        b. models a and b are good
+        c. models a and b are bad
+- still, evaluation by AI is needed
+    - models can become too sophisticated for human evaluation
+    - it can also detect human preference
+        - can adapt to ever-expanding benchmarks AI models require
 
 ## NOA-AI connection
 - NOA is a traditional ML system since there's a specific purpose and task
