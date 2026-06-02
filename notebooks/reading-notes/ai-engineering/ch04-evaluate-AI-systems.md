@@ -43,24 +43,57 @@
         - entailment: hypothesis can be inferred from the premise (factual consistency)
         - contradiction: hypothesis contradicts the premise (factual inconsistency)
         - neutral: premise doesn't entail nor contradict the hypothesis (irrelevant)
-- AI as a judge can evaluate factual consistency too 
+- AI as a judge can evaluate factual consistency too
+- specific scorers can be specialized
+    - makes factual consistency classification-based
+    - predicts entailment
 ### Instruction-Following Capability
+- obviously, a core requirement
+- a model can have domain-specific capability but bad instruction following
+    - important to troubleshoot where the issue is coming from
+        - instruction following vs. domain specific capability vs. generation capability
+- outputs can be verified using follow up criteria
+    - follow up criteria can be evaluated by human or AI evaluator
+- *roleplaying* is a type of real-world instruction to help evaluate the model
+    - gives users a character to interact with
+    - as prompt engineering technique to improve quality of model's outputs
+    - evaluate that the model stays in character
 
 ### Cost and Latency
-
+- important consideration for a useful model
+    - *Pareto optimization*: optimizing for multiple objectives
+        - need to define non-negotiables and prioritize requirements
+- more tokens to generate = higher latency
 ---
 
 ## Model Selection
-
+- best model for your specific application is more important
+    - starts with describing your criteria
+1. figure out the best achievable performance
+2. map models against cost and performance to account for cost and latency
 ### Model Selection Workflow
-
-### Model Build Versus Buy
-
-### Navigate Public Benchmarks
-
+- hard attributes: what is impossible or impractical to change
+    - model providers and your own policies decide this
+- soft attributes: what you can and what you're willing to change
+    - ex. accuracy, toxicity, factual consistency
+    - balance optimism vs. being realistic
+- evaluation workflow
+    1. filter out models with irrelevant hard attributes (ex. commercial APIs vs. own models)
+    2. use public data to narrow down promising models (ex. model quality, latency, and cost)
+    3. run experiments with internal evaluation pipeline (our own criteria) to find the best model
+    4. continuously monitor production to detect failure and collect feedback
+- open weight: publicly available
+- open model: open data
+    - flexible model usage (can retrain the model from scratch)
+- open source models also need relevant licensing, each with their own conditions (importantly, commercial use)
+#### Open Source Models vs. Model APIs
+- inference service: service that hosts the model and receives user queries also runs the models and returns it
+    - model API: interface for users to interact w/
+    
 ---
 
 ## Design Your Evaluation Pipeline
+- 
 
 ### Step 1. Evaluate All Components in a System
 
