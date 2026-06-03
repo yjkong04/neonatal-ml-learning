@@ -17,5 +17,4 @@ Be able to take a pretrained CNN, fine-tune it on a new domain, and properly eva
 - `week02-pytorch-transfer-learning.ipynb` — Same task in raw PyTorch, no fast.ai wrapper
 - `week02-kramer-prototype.ipynb` — Kramer-zone classifier on public neonatal jaundice imagery (lightweight version; full version lives in `projects/kramer-classifier/`)
 
-## Running notes
-*(populate as the phase progresses)*
+# Phase 2 completed in /projects/kramer-classifier

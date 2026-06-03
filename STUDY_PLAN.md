@@ -13,6 +13,7 @@
 - ✅ McKinney Chapter 5 (pandas intro)
 - ✅ Kramer classifier — done, demoed, landed the tech team role
 - ✅ EMG fatigue detector — synthetic pipeline + 1D CNN + concept bottleneck done
+- 🚧 Stage 1.1 — Probability & Bayesian Inference (active)
 - 🚧 ECG arrhythmia classifier — data loading started (PhysioNet 2017)
 - ⏸️ McKinney Chapters 8, 10, 11 (wrangling, groupby, time series) — queued
 - 📖 AI Engineering (Chip Huyen) — reading in parallel
