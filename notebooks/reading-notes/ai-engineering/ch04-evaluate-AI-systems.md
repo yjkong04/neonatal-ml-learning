@@ -82,13 +82,19 @@
     2. use public data to narrow down promising models (ex. model quality, latency, and cost)
     3. run experiments with internal evaluation pipeline (our own criteria) to find the best model
     4. continuously monitor production to detect failure and collect feedback
-- open weight: publicly available
-- open model: open data
+- open weight: just publicly available
+- open model: actually open data
     - flexible model usage (can retrain the model from scratch)
 - open source models also need relevant licensing, each with their own conditions (importantly, commercial use)
 #### Open Source Models vs. Model APIs
-- inference service: service that hosts the model and receives user queries also runs the models and returns it
-    - model API: interface for users to interact w/
+- inference service: service that hosts the model and receives user queries. also runs the models and returns it
+    - model API: interface for users to interact w/. API of the inference service, for example
+- so a model can be: open source, accessible via API, or both
+    - APIs are guarded by a paywall, typically
+    - accessible through model providers (OpenAI/Anthropic), cloud service providers (Azure, Google Cloud), or third-party (Databricks)
+    - performance can vary slightly based on the API
+- using an API provider risks leaking data to that provider to train their models
+- 
     
 ---
 
@@ -104,5 +110,7 @@
 ---
 
 ## NOA-AI connection
-
+- we would do a blend of hosting the model ourself and using a model API (i think)
+    - our infant proprietary model + existing APIs for LLMs and voice dictation
+    - need to look at service-level agreements (SLA) when using another API
 ## Questions / follow-up
