@@ -12,25 +12,37 @@ All work uses public datasets (PhysioNet, ISIC, Kaggle releases) or self-generat
 
 ---
 
-## Completed projects
+# Neonatal ML Learning
 
-### Kramer classifier
-
-An 8-day compressed sprint that shipped a working transfer-learning prototype for neonatal jaundice severity classification. Trained on HAM10000 (adult dermoscopy) as a public stand-in for neonatal jaundice imagery. Includes class-weighted training, calibration analysis (ECE), skin-tone fairness audit, lighting-robustness training run, temperature-scaling recalibration, and a 10-minute demo notebook.
-
-**Honest scope:** prototype of the technique, not a deployable model. The architecture and training pipeline mirror what the production neonatal jaundice classifier will use; the training data does not.
-
-
-Code and results: [`projects/kramer-classifier/`](projects/kramer-classifier/)
+Applied ML engineer in clinical decision support. This repo contains supervised portfolio 
+projects and textbook notes built toward production multi-modal medical AI work.
 
 ---
 
-### EMG fatigue detector
+## Projects
 
-A 1D CNN for detecting respiratory muscle fatigue from diaphragmatic surface EMG, built as a prototype of the specialist-CNN architecture pattern used in multi-modal clinical inference systems. Trains on synthetic data from a physiologically calibrated simulator, uses a 1D ResNet with a deterministic feature branch, and produces five concept-bottleneck outputs (fatigue probability, respiratory effort, MDF slope, spectral compression, sample entropy).
+### Kramer Classifier — Neonatal Jaundice Severity via Transfer Learning
 
+Transfer learning prototype for Kramer zone classification on the HAM10000 dermoscopy dataset.
+Demonstrates the full clinical-CNN pipeline: handling severe class imbalance (72% dominant class),
+calibration analysis (ECE 0.083), brightness-proxy fairness audit, lighting-robustness training,
+and temperature-scaling recalibration.
 
-Code: [`projects/emg-fatigue/`](projects/emg-fatigue/)
+**Results:** 72.4% test accuracy (macro-F1 0.474) on 7-class HAM10000 with class weighting.
+Minority-class recall improved 2–9× over unweighted baseline. ECE 0.083 (production gate: ≤0.04;
+temperature scaling applied in notebook 05).
+
+Code: [`projects/kramer-classifier/`](projects/kramer-classifier/)
+
+---
+
+## Skills — what this work demonstrates
+
+- Handling severe class imbalance in clinical datasets (weighted cross-entropy, recall-focused eval)
+- Model calibration for decision-support contexts (ECE, reliability diagrams, temperature scaling)
+- Skin-tone fairness auditing with honest framing of proxy limitations
+- Leakage-safe evaluation (stratified hold-out, patient-level reasoning)
+- Transfer learning from general-domain data to a new clinical domain
 
 ---
 
