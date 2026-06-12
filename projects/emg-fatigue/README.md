@@ -2,16 +2,12 @@
 
 Detects respiratory muscle exhaustion from diaphragmatic surface EMG.
 
-**Module:** emg-module · 1D ResNet specialist
 
-**Status:** In progress. Synthetic data pipeline first; surface-EMG-sensor data when available.
+**Status:** In progress. Training on synthetic data; real-sensor integration pending.
 
 ---
 
 ## Signal
-
-- Source: surface EMG surface-EMG-sensor diaphragm module
-- Sampling rate: 1 kHz (matches emg-module cadence)
 - No Layer 2 polynomial threshold — CNN-only path
 
 ## Approach
@@ -40,7 +36,7 @@ Fatigue manifests breath-by-breath in the EMG spectrum: as the diaphragm tires, 
 
 - [Muller et al. (1979) — The consequences of diaphragmatic muscle fatigue in the newborn infant](https://pubmed.ncbi.nlm.nih.gov/385813/) — landmark paper establishing that a >20% fall in the high/low frequency power ratio indicates diaphragmatic fatigue in neonates, and that fatigue preceded apnea when intercostal compensation failed. Primary justification for `spectral_compression` as a concept bottleneck output.
 - [Muller et al. (1981) — Synergistic behavior of inspiratory muscles after diaphragmatic fatigue in the newborn](https://pubmed.ncbi.nlm.nih.gov/7327953/) — shows intercostal recruitment as a compensatory response to diaphragmatic fatigue; relevant to how CNN-EMG-Fatigue output interacts with CNN-Retraction in the SA scorer.
-- [Gaultier et al. (1977) — Respiratory muscle EMG in newborns: a non-intrusive method](https://pubmed.ncbi.nlm.nih.gov/617314/) — earliest validation that surface (non-intrusive) diaphragmatic EMG is clinically usable in neonates. Supports the surface-EMG-sensor electrode approach in emg-module.
+- [Gaultier et al. (1977) — Respiratory muscle EMG in newborns: a non-intrusive method](https://pubmed.ncbi.nlm.nih.gov/617314/) — earliest validation that surface (non-intrusive) diaphragmatic EMG is clinically usable in neonates. Supports the use of surface electrode placement for diaphragmatic EMG in clinical neonatal settings.
 - [Pons-Odena et al. (2017) — Low-power system for diaphragmatic EMG acquisition in neonates](https://pubmed.ncbi.nlm.nih.gov/28260954/) — hardware-level validation for surface electrode placement and signal quality in a NICU setting.
 - [Ratnovsky et al. (2021) — Respiratory muscle function in the newborn: a narrative review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8053897/) — covers all assessment methods (EMG, maximal pressures, thoraco-abdominal asynchrony, tension-time index); context for what the SA scorer synthesises.
 
