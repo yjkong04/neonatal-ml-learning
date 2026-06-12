@@ -11,7 +11,7 @@ import scipy.signal
 from pathlib import Path
 from typing import Optional
 
-FS = 1000          # Hz — matches emg-module
+FS = 1000          # Hz - standard neonatal diaphragmatic sEMG sampling rate
 WINDOW_S = 30      # seconds per training sample (~20-30 neonatal breaths)
 RESP_RATE = 50     # breaths/min (neonatal; 40-60 range)
 
