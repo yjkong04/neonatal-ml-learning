@@ -18,7 +18,8 @@ All work uses public datasets (PhysioNet, ISIC, Kaggle releases) or self-generat
 
 An 8-day compressed sprint that shipped a working transfer-learning prototype for neonatal jaundice severity classification. Trained on HAM10000 (adult dermoscopy) as a public stand-in for neonatal jaundice imagery. Includes class-weighted training, calibration analysis (ECE), skin-tone fairness audit, lighting-robustness training run, temperature-scaling recalibration, and a 10-minute demo notebook.
 
-**Honest scope:** prototype of the technique, not a deployable model. The architecture and training pipeline mirror what `production-jaundice-classifier` will use in production; the training data does not.
+**Honest scope:** prototype of the technique, not a deployable model. The architecture and training pipeline mirror what the production neonatal jaundice classifier will use; the training data does not.
+
 
 Code and results: [`projects/kramer-classifier/`](projects/kramer-classifier/)
 
@@ -26,7 +27,8 @@ Code and results: [`projects/kramer-classifier/`](projects/kramer-classifier/)
 
 ### EMG fatigue detector
 
-A 1D CNN for detecting respiratory muscle fatigue from diaphragmatic surface EMG — a direct prototype of `production-emg-module`, a specialist module in the NOA-AI clinical inference engine. Trains on synthetic data from a physiologically calibrated simulator, uses a 1D ResNet with a deterministic feature branch, and produces five concept-bottleneck outputs (fatigue probability, respiratory effort, MDF slope, spectral compression, sample entropy).
+A 1D CNN for detecting respiratory muscle fatigue from diaphragmatic surface EMG, built as a prototype of the specialist-CNN architecture pattern used in multi-modal clinical inference systems. Trains on synthetic data from a physiologically calibrated simulator, uses a 1D ResNet with a deterministic feature branch, and produces five concept-bottleneck outputs (fatigue probability, respiratory effort, MDF slope, spectral compression, sample entropy).
+
 
 Code: [`projects/emg-fatigue/`](projects/emg-fatigue/)
 
