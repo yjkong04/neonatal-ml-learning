@@ -84,7 +84,6 @@ Five phases across the core ML skill domains relevant to clinical decision suppo
 
 | Phase | Focus | Capstone |
 |---|---|---|
-| Stage 1 — ML Foundations | Probability, classification, evaluation metrics | — |
 | 1 — Foundations | Python, NumPy, pandas, time-series indexing | Rolling HRV from synthetic vitals |
 | 2 — Image CNNs | Transfer learning, fine-tuning, augmentation | Kramer classifier ✅ |
 | 3 — Signal CNNs | 1D CNNs, spectrograms, signal processing | ECG arrhythmia classifier (PhysioNet 2017) |
@@ -118,9 +117,9 @@ Full plan with weekly checkpoints and textbook reading strategy: [STUDY_PLAN.md]
 | AI Engineering Ch. 2 — Foundation Models | ✅ done |
 | AI Engineering Ch. 3 — Evaluation Methodology | ✅ done |
 | AI Engineering Ch. 4 — Evaluate AI Systems | ✅ done |
-| AI Engineering Ch. 8 — Dataset Engineering | ✅ done |
-| AI Engineering Ch. 9 — Inference Optimization | ✅ done |
-| AI Engineering Ch. 10 — AI Engineering Architecture | ✅ done |
+| AI Engineering Ch. 8 — Dataset Engineering | 🚧 in progress |
+| AI Engineering Ch. 9 — Inference Optimization | 🚧 in progress |
+| AI Engineering Ch. 10 — AI Engineering Architecture | 🚧 in progress |
 | Stage 1.1 — Probability & Bayesian Inference | 🚧 in progress |
 | ECG arrhythmia classifier | ⏸️ scaffolded, not started |
 | Rolling HRV notebook | ⏸️ queued |

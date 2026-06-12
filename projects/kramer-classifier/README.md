@@ -1,8 +1,8 @@
-# Kramer Classifier — Phase 2 Capstone
+# Kramer Classifier — Neonatal Jaundice Severity classification
 
 A neonatal jaundice severity classifier based on the Kramer dermal staging system.
 
-**Status:** Learning prototype — in progress. Demo target 2026-05-22.
+**Status:** Complete. Reproducible from a clean clone; see NOTES.md for data setup.
 
 ---
 
@@ -179,9 +179,9 @@ jupyter lab notebooks/
 
 Run notebooks in order: 01 → 02 → 03.
 
-## Success criteria
+## How this project was validated
 
-- Reproducible from a clean clone via NOTES.md
-- Test-set accuracy > 70% on the class-weighted model
-- Limitations clearly stated (dataset, fairness, calibration)
-- Fairness analysis present, with honest framing about what HAM10000 can and can't tell us about skin-tone bias
+- Reproducible from a clean clone: all code and scripts are in this repo; data setup is in NOTES.md
+- Test-set accuracy: 72.4% on the class-weighted model (Run 2), with full per-class breakdown in Results above
+- Limitations explicitly stated: dataset mismatch (adult dermoscopy vs. neonatal jaundice), proxy fairness metric, ECE 2× the production gate
+- Fairness audit present with honest framing about what HAM10000 can and cannot tell us about skin-tone bias in neonates

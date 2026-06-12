@@ -16,9 +16,9 @@ Comfortable enough with the data stack to do real work in Phases 2+. Specificall
 - `week01-time-series-indexing.ipynb` — Ch 11 resampling, rolling windows, lag features — **deferred to post-Kramer-sprint**
 - `week01-hrv-from-rr-intervals.ipynb` — SDNN, RMSSD, pNN50 from R-R intervals — **deferred to post-Kramer-sprint**
 
-## Sprint pivot (2026-05-12)
+## Phase 1 checkpoint note
 
-The Kramer classifier compressed sprint (see [STUDY_PLAN.md](../../STUDY_PLAN.md)) front-loads Ch 6 + Ch 7 fast-skims into days 1–2, then suspends Phase 1 until after the demo. Ch 8 (wrangling), Ch 10 (groupby), Ch 11 (time series) resume after the demo lands.
+Phase 1 foundations work was paused partway through to complete the Kramer classifier project. Ch. 8 (wrangling), Ch. 10 (groupby), and Ch. 11 (time series) resume after the Kramer project.
 
 ## Running notes
 *(populate as the phase progresses — questions, gotchas, things that clicked)*
