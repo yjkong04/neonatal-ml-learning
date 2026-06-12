@@ -93,15 +93,23 @@
     - APIs are guarded by a paywall, typically
     - accessible through model providers (OpenAI/Anthropic), cloud service providers (Azure, Google Cloud), or third-party (Databricks)
     - performance can vary slightly based on the API
-- using an API provider risks leaking data to that provider to train their models
-- 
-    
+- using an API provider risks leaking data to that provider to train their models 
 ---
 
 ## Design Your Evaluation Pipeline
-- 
+- knowing good vs. bad outcomes
 
 ### Step 1. Evaluate All Components in a System
+- different levels of evaluation: per task > per turn > and per immediate output
+- end-to-end output is different from intermediate output from each component
+    - problems at the end can be because of any intermediate step
+    - evaluation method for each intermediate step is different
+- ideal: evaluation per turn AND per task 
+    - turns can be multiple steps (messages)
+    - *turn-based evaluation*: evaluating the quality of each output
+    - *task-based evaluation*: is the task completed
+        - how many turns did it take
+- 
 
 ### Step 2. Create an Evaluation Guideline
 
@@ -113,4 +121,5 @@
 - we would do a blend of hosting the model ourself and using a model API (i think)
     - our infant proprietary model + existing APIs for LLMs and voice dictation
     - need to look at service-level agreements (SLA) when using another API
+    - also, we need to run the model locally (need self-hosting model)
 ## Questions / follow-up

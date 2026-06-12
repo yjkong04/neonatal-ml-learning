@@ -43,23 +43,21 @@ Code: [`projects/emg-fatigue/`](projects/emg-fatigue/)
 ├── .gitignore
 ├── requirements.txt
 │
-├── notebooks/                   Learning notebooks by phase
+├── notebooks/                   Learning notebooks and reading notes
+│   ├── stage1-ml-foundations/       Probability, Bayesian inference, classification
 │   ├── phase1-foundations/          Python, NumPy, pandas
 │   ├── phase2-image-cnns/           Image classification, transfer learning
 │   ├── phase3-signal-cnns/          1D CNNs, ECG, biomedical signals
 │   ├── phase4-audio-ml/             Mel-spectrograms, audio classification
-│   └── phase5-fusion-calibration/   Multi-modal fusion, calibration, fairness
+│   ├── phase5-fusion-calibration/   Multi-modal fusion, calibration, fairness
+│   └── reading-notes/
+│       └── ai-engineering/          Chapter notes — Chip Huyen AI Engineering
 │
 ├── projects/                    Portfolio projects
 │   ├── kramer-classifier/           Image CNN for jaundice severity — done
 │   ├── emg-fatigue/                 1D CNN for respiratory muscle fatigue — done
-│   ├── ecg-arrhythmia/              1D CNN on PhysioNet 2017 (future)
-│   └── sepsis-early-warning/        Multi-modal fusion (future)
-│
-├── textbooks/                   Reading notes
-│   ├── ai-engineering/              Chip Huyen — AI Engineering (O'Reilly)
-│   ├── tinyml/                      Warden & Situnayake — TinyML
-│   └── interpretable-ml/            Molnar — Interpretable Machine Learning (free online)
+│   ├── ecg-arrhythmia/              1D CNN on PhysioNet 2017 — scaffolded
+│   └── sepsis-early-warning/        Multi-modal fusion — future
 │
 └── resources/                   Reading list, dataset links, tooling notes
 ```
@@ -72,6 +70,7 @@ Five phases across the core ML skill domains relevant to clinical decision suppo
 
 | Phase | Focus | Capstone |
 |---|---|---|
+| Stage 1 — ML Foundations | Probability, classification, evaluation metrics | — |
 | 1 — Foundations | Python, NumPy, pandas, time-series indexing | Rolling HRV from synthetic vitals |
 | 2 — Image CNNs | Transfer learning, fine-tuning, augmentation | Kramer classifier ✅ |
 | 3 — Signal CNNs | 1D CNNs, spectrograms, signal processing | ECG arrhythmia classifier (PhysioNet 2017) |
@@ -84,15 +83,13 @@ Full plan with weekly checkpoints and textbook reading strategy: [STUDY_PLAN.md]
 
 ## Textbooks
 
-| Book | How to use it |
-|---|---|
-| *AI Engineering* — Chip Huyen | Linear read; focus on evaluation, dataset engineering, inference optimization |
-| *TinyML* — Warden & Situnayake | Front-load concept chapters; skim hardware-specific examples |
-| *Interpretable ML* — Molnar (free) | Reference by chapter; pull SHAP and feature importance when you reach Phase 5 |
-| *Hands-On ML* — Géron | Reference only; pull Ch. 14 for CNNs, Ch. 15 for sequences |
-| *Python for Data Analysis* — McKinney | Pull Ch. 8, 10, 11; already done Ch. 4–5 |
-
-Notes for each book live in `textbooks/`.
+| Book | How to use it | Notes |
+|---|---|---|
+| *AI Engineering* — Chip Huyen | Non-linear; high-priority chapters first | [`notebooks/reading-notes/ai-engineering/`](notebooks/reading-notes/ai-engineering/) |
+| *TinyML* — Warden & Situnayake | Front-load concept chapters; skim hardware-specific examples | — |
+| *Interpretable ML* — Molnar (free) | Reference by chapter; pull SHAP and feature importance when you reach Phase 5 | — |
+| *Hands-On ML* — Géron | Reference only; pull Ch. 14 for CNNs, Ch. 15 for sequences | — |
+| *Python for Data Analysis* — McKinney | Pull Ch. 8, 10, 11; already done Ch. 4–5 | — |
 
 ---
 
@@ -104,7 +101,14 @@ Notes for each book live in `textbooks/`.
 | McKinney Ch. 5 (pandas intro) | ✅ done |
 | Kramer classifier | ✅ done — 72.4% test acc, ECE 0.083, fairness + calibration complete |
 | EMG fatigue detector | ✅ synthetic pipeline + CNN + concept bottleneck done |
-| ECG arrhythmia classifier | 🚧 data loading started (PhysioNet 2017) |
+| AI Engineering Ch. 2 — Foundation Models | ✅ done |
+| AI Engineering Ch. 3 — Evaluation Methodology | ✅ done |
+| AI Engineering Ch. 4 — Evaluate AI Systems | ✅ done |
+| AI Engineering Ch. 8 — Dataset Engineering | ✅ done |
+| AI Engineering Ch. 9 — Inference Optimization | ✅ done |
+| AI Engineering Ch. 10 — AI Engineering Architecture | ✅ done |
+| Stage 1.1 — Probability & Bayesian Inference | 🚧 in progress |
+| ECG arrhythmia classifier | ⏸️ scaffolded, not started |
 | Rolling HRV notebook | ⏸️ queued |
 | Audio classifier | — |
 | Multi-modal sepsis early-warning | — |
