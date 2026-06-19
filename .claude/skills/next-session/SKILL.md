@@ -29,13 +29,13 @@ Priority order:
 - Scope to 1–2 hours. If the next checkpoint is bigger, name the first sub-piece only (e.g., "get PhysioNet 2017 ECG data loading working," not "finish Phase 3").
 
 ### Step 4 — Output format
-Direct and short:
+3–4 bullets. Nothing else — no preamble paragraph explaining how you cross-referenced the docs, no narrative, no summary after.
 - **Branch:** which branch to check out, or the exact `git checkout -b ...` for a new one
 - **File/task:** the exact file or notebook to open and what to do in it
-- **Why this one:** one sentence, only if non-obvious
+- **Why this one:** fold into the task bullet, or drop entirely if obvious — only its own bullet if it's genuinely non-obvious
 - **Done when:** a concrete stopping point for the block
 
-No alternatives list, no backlog dump. One task. If it's wrong, she'll redirect.
+No alternatives list, no backlog dump, no restating what Step 1–3 found. One task, straight to the bullets.
 
 ### Step 5 — Read-only
 Don't edit README.md or STUDY_PLAN.md progress markers, and don't add "today" notes anywhere. `git log` and the next commit/PR are the source of truth for what got done — this skill only reads state, it doesn't record it.
