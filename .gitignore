@@ -55,6 +55,8 @@ mlruns/
 # Secrets
 .env
 .env.local
-.claude
+.claude/*
+!.claude/skills/
+!.claude/skills/**
 DONTLOOK.txt
 
