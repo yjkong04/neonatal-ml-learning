@@ -1,7 +1,7 @@
 # Ch. 8 — Dataset Engineering
 
 **Priority:** Read fully — directly relevant to building CNN training sets
-**Sections:** Data curation · Data augmentation · Synthetic data · Data quality
+**Sections:** Data curation · Data augmentation · Synthetic data · Data quality 
 
 ---
 
