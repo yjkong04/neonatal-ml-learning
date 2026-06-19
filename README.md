@@ -8,6 +8,8 @@ This repo tracks three parallel learning tracks:
 2. **AI engineering foundations** — reading and notes from *AI Engineering* (Chip Huyen), *TinyML* (Warden & Situnayake), and *Interpretable Machine Learning* (Molnar), connected to what Corvita is actually building
 3. **General data science** — Python, NumPy, pandas, and the broader toolkit
 
+A parallel **math foundations** track (probability, linear algebra, calculus — conceptual fluency, not derivation) runs alongside these, closing the theory gaps that the above tracks assume. Detail in [resources/math_study_plan.md](resources/math_study_plan.md).
+
 All work uses public datasets (PhysioNet, ISIC, Kaggle releases) or self-generated synthetic data. No proprietary Corvita data, code, or documents are committed here.
 
 ---
@@ -73,7 +75,7 @@ Code: [`projects/kramer-classifier/`](projects/kramer-classifier/)
 │   ├── ecg-arrhythmia/              1D CNN on PhysioNet 2017 — scaffolded
 │   └── sepsis-early-warning/        Multi-modal fusion — future
 │
-└── resources/                   Reading list, dataset links, tooling notes
+└── resources/                   Reading list, dataset links, tooling notes, math study plan
 ```
 
 ---
@@ -120,7 +122,7 @@ Full plan with weekly checkpoints and textbook reading strategy: [STUDY_PLAN.md]
 | AI Engineering Ch. 8 — Dataset Engineering | 🚧 in progress |
 | AI Engineering Ch. 9 — Inference Optimization | 🚧 in progress |
 | AI Engineering Ch. 10 — AI Engineering Architecture | 🚧 in progress |
-| Stage 1.1 — Probability & Bayesian Inference | 🚧 in progress |
+| Stage 1.1 — Probability & Bayesian Inference (math sprint) | 🚧 in progress |
 | ECG arrhythmia classifier | ⏸️ scaffolded, not started |
 | Rolling HRV notebook | ⏸️ queued |
 | Audio classifier | — |

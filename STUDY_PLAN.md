@@ -17,6 +17,7 @@
 - 🚧 ECG arrhythmia classifier — data loading started (PhysioNet 2017)
 - ⏸️ McKinney Chapters 8, 10, 11 (wrangling, groupby, time series) — queued
 - 📖 AI Engineering (Chip Huyen) — reading in parallel
+- 📐 Math foundations (probability, linear algebra, calculus) — parallel track, see below
 
 ---
 
@@ -87,6 +88,20 @@ Audio ML is folded in as a shorter side-phase (mel-spectrograms → 2D CNN, tech
 - **Pull when needed in Phase 2:** Ch. 14 (CNNs) — clearest technical walkthrough of convolution, pooling, architecture
 - **Pull when needed in Phase 3:** Ch. 15 (RNNs/sequences) — relevant for time-series signal work
 - **Pull when needed in Phase 5:** Calibration and ensemble chapters
+
+---
+
+## Math foundations (parallel track)
+
+Not a phase — runs alongside whatever phase is active, the same way the AI Engineering reading does. The gap this closes is conceptual fluency, not derivation: can you explain probability-vs-likelihood, bias-variance, or what an eigenvector is to a teammate without notes.
+
+- **Probability & Bayesian inference** — the heavy lift, and it's the same ground as Stage 1.1 above: MLE, Bayes/base rates, distributions, bias-variance. Maps directly to NOA-AI's calibrated probability outputs and to why `P(sepsis) = 0.73` needs to mean what it says.
+- **Linear algebra** — conceptual only (3Blue1Brown level). Matrix multiplication as a transformation, eigenvectors/eigenvalues, and the one sentence that matters: PCA finds the directions of maximum variance via the eigenvectors of the covariance matrix. Relevant once Phase 5 fusion/SHAP work needs it.
+- **Calculus** — touch-up only (gradients, chain rule → backprop, convex vs. non-convex). Relevant once Phase 2 hits raw PyTorch training loops.
+
+**Cadence:** one StatQuest video or 3Blue1Brown segment a week, plus just-in-time lookups whenever a phase's build work surfaces a concept that's still shaky — don't pre-learn all of it up front.
+
+Full day-by-day sprint, video links, and practice problems: [resources/math_study_plan.md](resources/math_study_plan.md)
 
 ---
 
