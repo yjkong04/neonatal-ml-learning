@@ -13,11 +13,23 @@
 - ✅ McKinney Chapter 5 (pandas intro)
 - ✅ Kramer classifier — done, demoed, landed the tech team role
 - ✅ EMG fatigue detector — synthetic pipeline + 1D CNN + concept bottleneck done
-- 🚧 Stage 1.1 — Probability & Bayesian Inference (active)
 - 🚧 ECG arrhythmia classifier — data loading started (PhysioNet 2017)
 - ⏸️ McKinney Chapters 8, 10, 11 (wrangling, groupby, time series) — queued
 - 📖 AI Engineering (Chip Huyen) — reading in parallel
 - 📐 Math foundations (probability, linear algebra, calculus) — parallel track, see below
+
+---
+
+## Job-search pivot 
+
+Fall applications (job-search plan, apps in fall) mean this roadmap needs to bend toward demoable deliverables, not curriculum completion. Biggest gap in the repo right now: nothing is deployed. Kramer is a notebook with results — "I built a CNN" is table stakes for an applied-ML role; "I shipped a working URL" is the differentiator. Reprioritized in order of ROI:
+
+1. **Deploy Kramer end-to-end** (Phase 2b below) — FastAPI + Docker + Hugging Face Spaces/Fly.io + thin Streamlit UI + a 2-min Loom on the calibration/fairness work. 
+2. **Quantize Kramer to INT8 + benchmark** (Phase 2c) — ONNX export, latency/size/accuracy numbers vs FP32. Maps directly to AI Engineering Ch. 9 and to the Jetson Thor INT8 constraint. ~2-3 days.
+3. **Vertical-slice multi-modal demo** (Phase 5-lite) — Kramer + EMG fatigue + synthetic tabular scorer, late fusion, calibration, SHAP. Ships in weeks, not at Week 16. Almost no early-career applicant has a multi-modal clinical fusion demo — this is the real differentiator.
+4. **AI Engineering Ch. 9 + 10, applied** — every concept lands in the deployed Kramer system; Ch. 10 is the spine for the deployment write-up.
+
+This pushes some existing plan items to parked status (not deleted — see "What to deprioritize" below for the full list and reasoning).
 
 ---
 
@@ -101,6 +113,13 @@ Not a phase — runs alongside whatever phase is active, the same way the AI Eng
 
 **Cadence:** one StatQuest video or 3Blue1Brown segment a week, plus just-in-time lookups whenever a phase's build work surfaces a concept that's still shaky — don't pre-learn all of it up front.
 
+**Ranked for interview value (job-search lens):**
+1. Linear algebra intuition for attention/embeddings — current weakest gap based on what's actually in the repo
+2. Probability + calibration math — already demonstrated (Kramer ECE 0.083 in the README is the proof; Stage 1.1 sprint caps here, see "What to deprioritize")
+3. Basic optimization (gradients, chain rule → backprop) — light touch only
+
+Cap at ~3-4 hrs/week background — this is not the bottleneck for fall applications, the deployment and fusion-demo work is.
+
 Full day-by-day sprint, video links, and practice problems: [resources/math_study_plan.md](resources/math_study_plan.md)
 
 ---
@@ -157,7 +176,42 @@ Most image-based specialist CNNs — jaundice zones, skin perfusion, neurovision
 
 ---
 
+## Phase 2b — Ship Kramer (NEW, top priority — this week)
+
+**Goal:** Convert the already-done Kramer notebook into a clickable, deployed artifact. See job-search pivot above.
+
+### Checkpoints
+- Wrap inference in FastAPI (upload image → calibrated probability + Kramer zone)
+- Dockerize
+- Deploy to Hugging Face Spaces or Fly.io
+- Thin Streamlit UI: upload → calibrated probability + temperature-scaled uncertainty + Kramer zone overlay
+- Record a 2-min Loom walking through the calibration + brightness-fairness audit
+- Pin the live URL in this README and LinkedIn
+
+### Deliverables
+- Live deployed Kramer demo (public URL)
+- Loom walkthrough
+
+---
+
+## Phase 2c — Quantization & Edge Benchmarking (NEW)
+
+**Goal:** Show production-ML understanding beyond `model.fit()`. Maps directly to AI Engineering Ch. 9 (active chapter) and to Corvita's Jetson Thor INT8 constraint.
+
+### Checkpoints
+- ONNX export of the Kramer model
+- INT8 quantization via ONNX Runtime (or TensorRT if a CUDA box is available)
+- Benchmark: latency, model size, accuracy delta vs. FP32
+
+### Deliverables
+- `deployment.md` with benchmark numbers
+- Short notebook
+
+---
+
 ## Phase 3 — 1D signal CNNs (Weeks 8–11)
+
+**Status: parked until after fall applications** — see job-search pivot above. EMG fatigue (Phase 3-adjacent, already done) feeds Phase 5-lite instead; ECG arrhythmia specifically is low marginal signal next to the fusion demo.
 
 **Goal:** Train models on biomedical time-series. Foundation for cardiac and respiratory waveform work.
 
@@ -187,6 +241,8 @@ Most image-based specialist CNNs — jaundice zones, skin perfusion, neurovision
 
 ## Phase 4 — Audio ML (Weeks 12–13)
 
+**Status: parked until after fall applications** — too far from the deployment/fusion story that's the current priority. See job-search pivot above.
+
 **Goal:** Audio classification via spectrograms. Foundations for cry and respiratory-sound classifiers.
 
 ### Resources
@@ -204,7 +260,25 @@ Most image-based specialist CNNs — jaundice zones, skin perfusion, neurovision
 
 ---
 
-## Phase 5 — Fusion & calibration (Weeks 14–16)
+## Phase 5-lite — Vertical-Slice Multi-Modal Demo (NEW, ships before the full Phase 5 capstone)
+
+**Goal:** Ship the multi-modal fusion story now, in weeks, not at Week 16. Almost no early-career applicant has built a multi-modal clinical fusion demo — this is where the real differentiation lives.
+
+### Approach
+Late fusion of pieces already built:
+- Kramer (image CNN) — done
+- EMG fatigue (1D signal CNN) — done
+- Synthetic Bhutani-style tabular threshold rules (simple scorer, not a full model)
+
+→ calibrated probability → SHAP attribution on a synthetic patient.
+
+### Deliverables
+- Notebook: late fusion + calibration + SHAP demo
+- Short write-up framing this as "the vertical slice that ships now; the full sepsis system below is the Week-16 version"
+
+---
+
+## Phase 5 — Fusion & calibration (Weeks 14–16, full capstone — after fall applications)
 
 **Goal:** Combine specialist outputs into calibrated multi-modal predictions. The layer that separates "person who trains CNNs" from "person who builds clinical decision systems."
 
@@ -257,15 +331,28 @@ See [resources/reading-list.md](resources/reading-list.md) for full list. Priori
 - Hyperparameter tuning before model architecture is right
 - Building from scratch when transfer learning works
 
+**Added for the fall-applications timeline:**
+- ECG arrhythmia from scratch — generic PhysioNet project, every ML applicant has one, low marginal signal next to the fusion demo. Parked, not deleted — `projects/ecg-arrhythmia/` scaffolding stays.
+- Phase 4 — Audio ML — too far from the deployment/fusion story. Parked until after fall applications.
+- McKinney Ch. 8/10/11 cover-to-cover — pull just-in-time for the Phase 5-lite demo, don't pre-read.
+- Stage 1.1 probability sprint — cap at "can explain to a teammate without notes" (the bar already set for this track). Don't let it become a hiding-in-prep activity.
+- Stage 7 of the Corvita CLAUDE.md context (neuro-symbolic AI, offline RL, federated learning, causal graphs) — signals depth but isn't on the fall-applications critical path. Save for after offers.
+
 ---
 
 ## Progress markers
 
+**Job-search-pivot markers (active, see above):**
+- **This week:** Kramer deployed to a public URL + Loom recorded
+- **+2-3 days after that:** INT8 quantization benchmark published (`deployment.md`)
+- **+2-3 weeks after that:** Vertical-slice multi-modal fusion demo shipped (notebook + write-up)
+
+**Original curriculum markers (Phase 3/4 portions now parked, see "What to deprioritize"):**
 - **End of Week 3:** Can load a CSV of vitals, resample to 1Hz, compute rolling HRV features, plot
 - **End of Week 7:** Raw PyTorch image classifier (Kramer redone without fast.ai)
-- **End of Week 11:** ECG arrhythmia classifier on PhysioNet 2017
-- **End of Week 13:** Audio classifier
-- **End of Week 16:** Multi-modal sepsis early-warning system
+- **End of Week 11:** ECG arrhythmia classifier on PhysioNet 2017 — parked
+- **End of Week 13:** Audio classifier — parked
+- **End of Week 16:** Multi-modal sepsis early-warning system (full capstone, post fall-applications version of Phase 5-lite)
 
 ---
 

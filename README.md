@@ -34,7 +34,8 @@ and temperature-scaling recalibration.
 Minority-class recall improved 2–9× over unweighted baseline. ECE 0.083 (production gate: ≤0.04;
 temperature scaling applied in notebook 05).
 
-Code: [`projects/kramer-classifier/`](projects/kramer-classifier/)
+Code: [`projects/kramer-classifier/`](projects/kramer-classifier/)  
+**Live demo:** _deploying — see [STUDY_PLAN.md job-search pivot](STUDY_PLAN.md#job-search-pivot-2026-06-26)_
 
 ---
 
@@ -82,15 +83,18 @@ Code: [`projects/kramer-classifier/`](projects/kramer-classifier/)
 
 ## Learning roadmap
 
-Five phases across the core ML skill domains relevant to clinical decision support:
+**Job-search pivot (2026-06-26):** reprioritized toward demoable deliverables ahead of fall applications. Full rationale in [STUDY_PLAN.md](STUDY_PLAN.md#job-search-pivot-2026-06-26).
 
-| Phase | Focus | Capstone |
-|---|---|---|
-| 1 — Foundations | Python, NumPy, pandas, time-series indexing | Rolling HRV from synthetic vitals |
-| 2 — Image CNNs | Transfer learning, fine-tuning, augmentation | Kramer classifier ✅ |
-| 3 — Signal CNNs | 1D CNNs, spectrograms, signal processing | ECG arrhythmia classifier (PhysioNet 2017) |
-| 4 — Audio ML | Mel-spectrograms, audio CNNs | Cry / respiratory sound classifier |
-| 5 — Fusion & Calibration | Late fusion, calibration, SHAP, fairness | Multi-modal sepsis early-warning system |
+| Phase | Focus | Capstone | Status |
+|---|---|---|---|
+| 1 — Foundations | Python, NumPy, pandas, time-series indexing | Rolling HRV from synthetic vitals | — |
+| 2 — Image CNNs | Transfer learning, fine-tuning, augmentation | Kramer classifier | ✅ |
+| **2b — Ship Kramer** | FastAPI + Docker + Hugging Face Spaces/Fly.io + Streamlit UI | Live deployed Kramer demo | 🎯 this week |
+| **2c — Quantization & Edge Benchmarking** | ONNX export, INT8, latency/size/accuracy benchmark | `deployment.md` | ⏸️ next |
+| 3 — Signal CNNs | 1D CNNs, spectrograms, signal processing | ECG arrhythmia classifier (PhysioNet 2017) | ⏸️ parked post fall apps |
+| 4 — Audio ML | Mel-spectrograms, audio CNNs | Cry / respiratory sound classifier | ⏸️ parked post fall apps |
+| **5-lite — Vertical-Slice Fusion Demo** | Kramer + EMG + tabular scorer, late fusion, SHAP | Multi-modal demo notebook | ⏸️ next |
+| 5 — Fusion & Calibration (full capstone) | Late fusion, calibration, SHAP, fairness | Multi-modal sepsis early-warning system | ⏸️ post fall apps |
 
 Full plan with weekly checkpoints and textbook reading strategy: [STUDY_PLAN.md](STUDY_PLAN.md)
 
@@ -120,13 +124,16 @@ Full plan with weekly checkpoints and textbook reading strategy: [STUDY_PLAN.md]
 | AI Engineering Ch. 3 — Evaluation Methodology | ✅ done |
 | AI Engineering Ch. 4 — Evaluate AI Systems | ✅ done |
 | AI Engineering Ch. 8 — Dataset Engineering | 🚧 in progress |
-| AI Engineering Ch. 9 — Inference Optimization | 🚧 in progress |
-| AI Engineering Ch. 10 — AI Engineering Architecture | 🚧 in progress |
-| Stage 1.1 — Probability & Bayesian Inference (math sprint) | 🚧 in progress |
-| ECG arrhythmia classifier | ⏸️ scaffolded, not started |
+| AI Engineering Ch. 9 — Inference Optimization | 🚧 in progress — applied directly to Kramer quantization (Phase 2c) |
+| AI Engineering Ch. 10 — AI Engineering Architecture | 🚧 in progress — spine for the deployment write-up |
+| Stage 1.1 — Probability & Bayesian Inference (math sprint) | 🚧 capped at "explain without notes" — not extending further, see job-search pivot |
+| **Kramer deployed (FastAPI + Docker + HF Spaces/Fly.io)** | 🎯 this week, top priority |
+| **Kramer INT8 quantization + benchmark** | ⏸️ next |
+| **Vertical-slice multi-modal fusion demo** | ⏸️ next |
+| ECG arrhythmia classifier | ⏸️ scaffolded, parked post fall apps |
 | Rolling HRV notebook | ⏸️ queued |
-| Audio classifier | — |
-| Multi-modal sepsis early-warning | — |
+| Audio classifier | ⏸️ parked post fall apps |
+| Multi-modal sepsis early-warning (full capstone) | ⏸️ post fall apps |
 
 ---
 
