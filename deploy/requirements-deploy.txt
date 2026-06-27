@@ -1,0 +1,12 @@
+# Deployment-only deps — separate from the training project's requirements.txt.
+# CPU-only torch/torchvision wheels via the extra index below; the default PyPI
+# wheels bundle CUDA and roughly triple the image size for no benefit on Fly's
+# CPU-only machines.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+torch==2.11.0+cpu
+torchvision==0.26.0+cpu
+fastapi==0.138.1
+uvicorn==0.46.0
+python-multipart==0.0.27
+pillow==12.2.0

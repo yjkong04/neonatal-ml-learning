@@ -1,0 +1,25 @@
+# `fly launch` will prompt you to confirm/rename the app and may rewrite parts
+# of this file — that's expected, see deploy/README.md.
+
+app = "kramer-classifier-demo"
+primary_region = "yyz"  # Toronto — closest region to you
+
+[build]
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0  # scales to zero when idle — see README for the cold-start tradeoff
+
+  [[http_service.checks]]
+    interval = "15s"
+    timeout = "5s"
+    grace_period = "10s"
+    method = "GET"
+    path = "/healthz"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"
